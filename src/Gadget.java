@@ -4,6 +4,16 @@ public abstract class Gadget {
     private String color;
     private int weight;
 
+    public Gadget(){
+
+    }
+    public Gadget(String name, String dimensions, String color, int weight) {
+        this.name = name;
+        this.dimensions = dimensions;
+        this.color = color;
+        this.weight = weight;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -37,8 +47,7 @@ public abstract class Gadget {
     }
 
     public String printSizes() {
-        String text = "The dimensions of a gadget are " + this.dimensions + " mm.";
-        return text;
+         return "The dimensions of a gadget are " + this.dimensions + " mm.";
     }
 
     public abstract void printInfo();

@@ -30,4 +30,30 @@ public class CPU {
         System.out.println("CPU is " + this.cpuModel + ".");
         System.out.println("CPU speed is " + this.cpuSpeed + " MHz.");
     }
+
+    @Override
+    public String toString() {
+        return "CPU{" +
+                "cpuModel='" + cpuModel + '\'' +
+                ", cpuSpeed=" + cpuSpeed +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        CPU cpu = (CPU) obj;
+
+        if (getCpuSpeed() != cpu.getCpuSpeed()) return false;
+        return getCpuModel() != null ? getCpuModel().equals(cpu.getCpuModel()) : cpu.getCpuModel() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getCpuModel() != null ? getCpuModel().hashCode() : 0;
+        result = 31 * result + getCpuSpeed();
+        return result;
+    }
 }

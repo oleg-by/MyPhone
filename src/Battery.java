@@ -34,4 +34,29 @@ public class Battery {
         System.out.println("The battery is " + this.typeBattery + ". It has " + this.capacity + " mAh capacity.");
     }
 
+    @Override
+    public String toString() {
+        return "Battery{" +
+                "capacity=" + capacity +
+                ", typeBattery='" + typeBattery + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        Battery battery = (Battery) obj;
+
+        if (getCapacity() != battery.getCapacity()) return false;
+        return getTypeBattery() != null ? getTypeBattery().equals(battery.getTypeBattery()) : battery.getTypeBattery() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getCapacity();
+        result = 31 * result + (getTypeBattery() != null ? getTypeBattery().hashCode() : 0);
+        return result;
+    }
 }

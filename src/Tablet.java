@@ -1,39 +1,38 @@
 import java.text.DecimalFormat;
 
-public class Phone extends Gadget {
+public class Tablet extends Gadget {
     private String brand;
     private String model;
-    private long phoneNumber;
     private String operatingSystem;
     private CPU cpu;
     private Battery battery;
+    private float displaySize;
 
-    public Phone() {
+    public Tablet() {
     }
 
-    public Phone(String brand, String model, long phoneNumber) {
+    public Tablet(String brand, String model) {
         this.brand = brand;
         this.model = model;
-        this.phoneNumber = phoneNumber;
     }
 
-    public Phone(String brand, String model, long phoneNumber, String operatingSystem, CPU cpu, Battery battery) {
+    public Tablet(String brand, String model, String operatingSystem, CPU cpu, Battery battery, float displaySize) {
         this.brand = brand;
         this.model = model;
-        this.phoneNumber = phoneNumber;
         this.operatingSystem = operatingSystem;
         this.cpu = cpu;
         this.battery = battery;
+        this.displaySize = displaySize;
     }
 
-    public Phone(String name, String dimensions, String color, int weight, String brand, String model, long phoneNumber, String operatingSystem, CPU cpu, Battery battery) {
+    public Tablet(String name, String dimensions, String color, int weight, String brand, String model, String operatingSystem, CPU cpu, Battery battery, float displaySize) {
         super(name, dimensions, color, weight);
         this.brand = brand;
         this.model = model;
-        this.phoneNumber = phoneNumber;
         this.operatingSystem = operatingSystem;
         this.cpu = cpu;
         this.battery = battery;
+        this.displaySize = displaySize;
     }
 
     public void setBrand(String brand) {
@@ -42,10 +41,6 @@ public class Phone extends Gadget {
 
     public void setModel(String model) {
         this.model = model;
-    }
-
-    public void setPhoneNumber(long phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 
     public void setOperatingSystem(String operatingSystem) {
@@ -60,16 +55,16 @@ public class Phone extends Gadget {
         this.battery = battery;
     }
 
+    public void setDisplaySize(float displaySize) {
+        this.displaySize = displaySize;
+    }
+
     public String getBrand() {
         return brand;
     }
 
     public String getModel() {
         return model;
-    }
-
-    public long getPhoneNumber() {
-        return phoneNumber;
     }
 
     public String getOperatingSystem() {
@@ -84,26 +79,16 @@ public class Phone extends Gadget {
         return battery;
     }
 
-    public void calling(Caller caller) {
-        System.out.println("Outgoing call to " + caller.getName() + " at number " + caller.getCallerID() + "...");
-    }
-
-    public void calling(long number) {
-        System.out.println("The number " + number + " you are calling is currently unavailable...");
-    }
-
-    public void sendMessage(String message, Caller caller) {
-        System.out.println("The message (" + message + ") has been sent to subscriber " + caller.getName() + " at number " + caller.getCallerID() + ".");
-    }
-
-    public void sendMessage(String message, long number) {
-        System.out.println("The message (" + message + ") has been sent to subscriber at number " + number + ".");
+    public float getDisplaySize() {
+        return displaySize;
     }
 
     @Override
     public void printInfo() {
         System.out.println("The " + this.getName() + " " + this.brand + " " + this.model + " has the following characteristics:");
         System.out.println(printSizes());
+        DecimalFormat decimalFormat = new DecimalFormat("#.#");
+        System.out.println("The display size of " + this.brand + " " + this.model + " is " + decimalFormat.format(this.displaySize) + " -inch.");
         System.out.println("The color of device is " + this.getColor() + ". The weight is " + this.getWeight() + " g.");
         System.out.println("The " + this.brand + " " + this.model + " runs on the " + this.operatingSystem + " operating system.");
         this.cpu.cpuInfo();
@@ -120,13 +105,13 @@ public class Phone extends Gadget {
 
     @Override
     public String toString() {
-        return "Phone{" +
+        return "Tablet{" +
                 "brand='" + brand + '\'' +
                 ", model='" + model + '\'' +
-                ", phoneNumber=" + phoneNumber +
                 ", operatingSystem='" + operatingSystem + '\'' +
                 ", " + cpu.toString() +
                 ", " + battery.toString() +
+                ", displaySize=" + displaySize +
                 '}';
     }
 
@@ -135,18 +120,20 @@ public class Phone extends Gadget {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
 
-        Phone phone = (Phone) obj;
+        Tablet tablet = (Tablet) obj;
 
-        if (getPhoneNumber() != phone.getPhoneNumber()) return false;
-        if (getBrand() != null ? !getBrand().equals(phone.getBrand()) : phone.getBrand() != null) return false;
-        return getModel() != null ? getModel().equals(phone.getModel()) : phone.getModel() == null;
+        if (getDisplaySize() != tablet.getDisplaySize()) return false;
+        if (getBrand() != null ? !getBrand().equals(tablet.getBrand()) : tablet.getBrand() != null) return false;
+        if (getModel() != null ? !getModel().equals(tablet.getModel()) : tablet.getModel() != null) return false;
+        return getOperatingSystem() != null ? getOperatingSystem().equals(tablet.getOperatingSystem()) : tablet.getOperatingSystem() == null;
     }
 
     @Override
     public int hashCode() {
-        int result = (int) getPhoneNumber();
-        result = 31 * result + (getModel() != null ? getModel().hashCode() : 0);
-        result = 31 * result + (getBrand() != null ? getBrand().hashCode() : 0);
+        int result = (int)getDisplaySize();
+        result = 31 * result + ((model == null) ? 0 : model.hashCode());
+        result = 31 * result + ((operatingSystem == null) ? 0 : operatingSystem.hashCode());
+        result = 31 * result + ((brand == null) ? 0 : brand.hashCode());
         return result;
     }
 }
