@@ -1,21 +1,31 @@
 public abstract class Gadget {
-    private String name;
+    private String type;
+    private String brand;
+    private String model;
     private String dimensions;
     private String color;
     private int weight;
 
-    public Gadget(){
+    public Gadget() {
 
     }
-    public Gadget(String name, String dimensions, String color, int weight) {
-        this.name = name;
+
+    public Gadget(String brand, String model) {
+        this.brand = brand;
+        this.model = model;
+    }
+
+    public Gadget(String type, String brand, String model, String dimensions, String color, int weight) {
+        this.type = type;
+        this.brand = brand;
+        this.model = model;
         this.dimensions = dimensions;
         this.color = color;
         this.weight = weight;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public void setDimensions(String dimensions) {
@@ -30,8 +40,8 @@ public abstract class Gadget {
         this.weight = weight;
     }
 
-    public String getName() {
-        return name;
+    public String getType() {
+        return type;
     }
 
     public String getDimensions() {
@@ -46,11 +56,25 @@ public abstract class Gadget {
         return weight;
     }
 
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
     public String printSizes() {
          return "The dimensions of a gadget are " + this.dimensions + " mm.";
     }
-
-    public abstract void printInfo();
 
     public abstract void charging(int chargingCurrent);
 

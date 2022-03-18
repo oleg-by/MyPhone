@@ -26,11 +26,6 @@ public class CPU {
         return cpuSpeed;
     }
 
-    public void cpuInfo() {
-        System.out.println("CPU is " + this.cpuModel + ".");
-        System.out.println("CPU speed is " + this.cpuSpeed + " MHz.");
-    }
-
     @Override
     public String toString() {
         return "CPU{" +

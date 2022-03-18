@@ -30,10 +30,6 @@ public class Battery {
         return typeBattery;
     }
 
-    public void batteryInfo() {
-        System.out.println("The battery is " + this.typeBattery + ". It has " + this.capacity + " mAh capacity.");
-    }
-
     @Override
     public String toString() {
         return "Battery{" +
