@@ -1,22 +1,17 @@
-import java.text.DecimalFormat;
-
 public class SmartWatch extends Gadget {
     private float displaySize;
-    private Battery battery;
 
     public SmartWatch() {
     }
 
-    public SmartWatch(String brand, String model, float displaySize, Battery battery) {
-        super(brand, model);
+    public SmartWatch(String brand, String model, Battery battery, float displaySize) {
+        super(brand, model, battery);
         this.displaySize = displaySize;
-        this.battery = battery;
     }
 
-    public SmartWatch(String type, String brand, String model, String dimensions, String color, int weight, float displaySize, Battery battery) {
-        super(type, brand, model, dimensions, color, weight);
+    public SmartWatch(String type, String brand, String model, String dimensions, String color, int weight, Battery battery, float displaySize) {
+        super(type, brand, model, dimensions, color, weight, battery);
         this.displaySize = displaySize;
-        this.battery = battery;
     }
 
     public float getDisplaySize() {
@@ -25,22 +20,6 @@ public class SmartWatch extends Gadget {
 
     public void setDisplaySize(float displaySize) {
         this.displaySize = displaySize;
-    }
-
-    public Battery getBattery() {
-        return battery;
-    }
-
-    public void setBattery(Battery battery) {
-        this.battery = battery;
-    }
-
-    @Override
-    public void charging(int chargingCurrent) {
-        DecimalFormat decimalFormat = new DecimalFormat("#.##");
-        float chargingTime = (float) (1.4 * this.battery.getCapacity() / chargingCurrent);
-        String result = decimalFormat.format(chargingTime);
-        System.out.println("Using this charging current " + chargingCurrent + " (mA), the battery charging time of " + this.getBrand() + " " + this.getModel() + " will be " + result + " h.");
     }
 
     @Override
@@ -53,7 +32,7 @@ public class SmartWatch extends Gadget {
                 ", color='" + this.getColor() + '\'' +
                 ", weight='" + this.getWeight() + '\'' +
                 ", displaySize=" + displaySize +
-                ", " + battery.toString() +
+                ", " + this.getBattery().toString() +
                 '}';
     }
 

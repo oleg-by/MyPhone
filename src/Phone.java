@@ -1,33 +1,28 @@
-import java.text.DecimalFormat;
-
-public class Phone extends Gadget {
+public class Phone extends Gadget implements Camera {
     private long phoneNumber;
     private String operatingSystem;
     private CPU cpu;
-    private Battery battery;
 
     public Phone() {
     }
 
-    public Phone(String brand, String model, long phoneNumber) {
-        super(brand, model);
+    public Phone(String brand, String model, Battery battery, long phoneNumber) {
+        super(brand, model, battery);
         this.phoneNumber = phoneNumber;
     }
 
-    public Phone(String brand, String model, long phoneNumber, String operatingSystem, CPU cpu, Battery battery) {
-        super(brand, model);
+    public Phone(String brand, String model, Battery battery, long phoneNumber, String operatingSystem, CPU cpu) {
+        super(brand, model, battery);
         this.phoneNumber = phoneNumber;
         this.operatingSystem = operatingSystem;
         this.cpu = cpu;
-        this.battery = battery;
     }
 
-    public Phone(String type, String brand, String model, String dimensions, String color, int weight, long phoneNumber, String operatingSystem, CPU cpu, Battery battery) {
-        super(type, brand, model, dimensions, color, weight);
+    public Phone(String type, String brand, String model, String dimensions, String color, int weight, Battery battery, long phoneNumber, String operatingSystem, CPU cpu) {
+        super(type, brand, model, dimensions, color, weight, battery);
         this.phoneNumber = phoneNumber;
         this.operatingSystem = operatingSystem;
         this.cpu = cpu;
-        this.battery = battery;
     }
 
     public void setPhoneNumber(long phoneNumber) {
@@ -42,10 +37,6 @@ public class Phone extends Gadget {
         this.cpu = cpu;
     }
 
-    public void setBattery(Battery battery) {
-        this.battery = battery;
-    }
-
     public long getPhoneNumber() {
         return phoneNumber;
     }
@@ -58,32 +49,9 @@ public class Phone extends Gadget {
         return cpu;
     }
 
-    public Battery getBattery() {
-        return battery;
-    }
-
-    public void calling(Caller caller) {
-        System.out.println("Outgoing call to " + caller.getName() + " at number " + caller.getCallerID() + "...");
-    }
-
-    public void calling(long number) {
-        System.out.println("The number " + number + " you are calling is currently unavailable...");
-    }
-
-    public void sendMessage(String message, Caller caller) {
-        System.out.println("The message (" + message + ") has been sent to subscriber " + caller.getName() + " at number " + caller.getCallerID() + ".");
-    }
-
-    public void sendMessage(String message, long number) {
-        System.out.println("The message (" + message + ") has been sent to subscriber at number " + number + ".");
-    }
-
     @Override
-    public void charging(int chargingCurrent) {
-        DecimalFormat decimalFormat = new DecimalFormat("#.##");
-        float chargingTime = (float) (1.4 * this.battery.getCapacity() / chargingCurrent);
-        String result = decimalFormat.format(chargingTime);
-        System.out.println("Using this charging current " + chargingCurrent + " (mA), the battery charging time of " + this.getBrand() + " " + this.getModel() + " will be " + result + " h.");
+    public void photograph(){
+        System.out.println(this.getBrand() + " " + this.getModel() + " can take photos.");
     }
 
     @Override
@@ -98,7 +66,7 @@ public class Phone extends Gadget {
                 ", phoneNumber=" + phoneNumber +
                 ", operatingSystem='" + operatingSystem + '\'' +
                 ", " + cpu.toString() +
-                ", " + battery.toString() +
+                ", " + this.getBattery().toString() +
                 '}';
     }
 

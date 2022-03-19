@@ -1,27 +1,22 @@
-import java.text.DecimalFormat;
-
-public class Tablet extends Gadget {
+public class Tablet extends Gadget implements Camera {
     private String operatingSystem;
     private CPU cpu;
-    private Battery battery;
     private float displaySize;
 
     public Tablet() {
     }
 
-    public Tablet(String brand, String model, String operatingSystem, CPU cpu, Battery battery, float displaySize) {
-        super(brand, model);
+    public Tablet(String brand, String model, Battery battery, String operatingSystem, CPU cpu, float displaySize) {
+        super(brand, model, battery);
         this.operatingSystem = operatingSystem;
         this.cpu = cpu;
-        this.battery = battery;
         this.displaySize = displaySize;
     }
 
-    public Tablet(String type, String brand, String model, String dimensions, String color, int weight, String operatingSystem, CPU cpu, Battery battery, float displaySize) {
-        super(type, brand, model, dimensions, color, weight);
+    public Tablet(String type, String brand, String model, String dimensions, String color, int weight, Battery battery, String operatingSystem, CPU cpu, float displaySize) {
+        super(type, brand, model, dimensions, color, weight, battery);
         this.operatingSystem = operatingSystem;
         this.cpu = cpu;
-        this.battery = battery;
         this.displaySize = displaySize;
     }
 
@@ -31,10 +26,6 @@ public class Tablet extends Gadget {
 
     public void setCpu(CPU cpu) {
         this.cpu = cpu;
-    }
-
-    public void setBattery(Battery battery) {
-        this.battery = battery;
     }
 
     public void setDisplaySize(float displaySize) {
@@ -49,20 +40,13 @@ public class Tablet extends Gadget {
         return cpu;
     }
 
-    public Battery getBattery() {
-        return battery;
-    }
-
     public float getDisplaySize() {
         return displaySize;
     }
 
     @Override
-    public void charging(int chargingCurrent) {
-        DecimalFormat decimalFormat = new DecimalFormat("#.##");
-        float chargingTime = (float) (1.4 * this.battery.getCapacity() / chargingCurrent);
-        String result = decimalFormat.format(chargingTime);
-        System.out.println("Using this charging current " + chargingCurrent + " (mA), the battery charging time of " + this.getBrand() + " " + this.getModel() + " will be " + result + " h.");
+    public void photograph(){
+        System.out.println(this.getBrand() + " " + this.getModel() + " can take photos.");
     }
 
     @Override
@@ -76,7 +60,7 @@ public class Tablet extends Gadget {
                 ", weight='" + this.getWeight() + '\'' +
                 ", operatingSystem='" + operatingSystem + '\'' +
                 ", " + cpu.toString() +
-                ", " + battery.toString() +
+                ", " + this.getBattery().toString() +
                 ", displaySize=" + displaySize +
                 '}';
     }

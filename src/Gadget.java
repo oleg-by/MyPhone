@@ -1,27 +1,37 @@
-public abstract class Gadget {
+import java.text.DecimalFormat;
+
+public abstract class Gadget implements Messenger, Charger, Calling {
     private String type;
     private String brand;
     private String model;
     private String dimensions;
     private String color;
     private int weight;
+    private Battery battery;
+    private Payment payment;
 
     public Gadget() {
 
     }
 
-    public Gadget(String brand, String model) {
+    public Gadget(String brand, String model, Battery battery) {
         this.brand = brand;
         this.model = model;
+        this.battery = battery;
+        if(brand.equals("Apple")) {this.payment = new ApplePay();}
+        else if(brand.equals("Samsung")) {this.payment = new SamsungPay();} else {this.payment = new MiPay();}
     }
 
-    public Gadget(String type, String brand, String model, String dimensions, String color, int weight) {
+    public Gadget(String type, String brand, String model, String dimensions, String color, int weight, Battery battery) {
         this.type = type;
         this.brand = brand;
         this.model = model;
         this.dimensions = dimensions;
         this.color = color;
         this.weight = weight;
+        this.battery = battery;
+        if(brand.equals("Apple")) {this.payment = new ApplePay();}
+        else if(brand.equals("Samsung")) {this.payment = new SamsungPay();} else {this.payment = new MiPay();}
     }
 
     public void setType(String type) {
@@ -40,6 +50,10 @@ public abstract class Gadget {
         this.weight = weight;
     }
 
+    public void setBattery(Battery battery) {
+        this.battery = battery;
+    }
+
     public String getType() {
         return type;
     }
@@ -54,6 +68,10 @@ public abstract class Gadget {
 
     public int getWeight() {
         return weight;
+    }
+
+    public Battery getBattery() {
+        return battery;
     }
 
     public String getBrand() {
@@ -72,10 +90,26 @@ public abstract class Gadget {
         this.model = model;
     }
 
-    public String printSizes() {
-         return "The dimensions of a gadget are " + this.dimensions + " mm.";
+    public Payment getPayment() {
+        return payment;
     }
 
-    public abstract void charging(int chargingCurrent);
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
+
+    public void makePayment(int amount){
+        payment.pay(amount);
+    }
+
+    @Override
+    public void charge(int chargingCurrent) {
+        System.out.println("Starting to charge the " + this.getType() + ".");
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        float chargingTime = (float) (COEFFICIENT * this.battery.getCapacity() / chargingCurrent);
+        String result = decimalFormat.format(chargingTime);
+        System.out.println("Using this charging current " + chargingCurrent + " (mA), the battery charging time of " + this.getBrand() + " " + this.getModel() + " will be " + result + " h.");
+    }
+
 
 }

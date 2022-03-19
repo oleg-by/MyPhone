@@ -2,10 +2,10 @@ public class Caller {
     private String name;
     private long callerID;
 
-    public Caller(String alex, long phoneNumber) {
+    public Caller() {
     }
 
-    public Caller(String name, int callerID) {
+    public Caller(String name, long callerID) {
         this.name = name;
         this.callerID = callerID;
     }
