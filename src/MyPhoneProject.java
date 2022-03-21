@@ -13,22 +13,26 @@ public class MyPhoneProject {
         SmartWatch watch = new SmartWatch("smart watch", "Apple", "Watch Series 7", "45 x 38 x 10.7", "grey", 39, batteryWatch, (float)1.9);
         Caller alex = new Caller("Alex", iphone.getPhoneNumber());
         Caller mary = new Caller("Mary", samsung.getPhoneNumber());
+        Transaction[] transactions = new Transaction[4];
+        transactions[0] = new Transaction("John Brown", "Bank of America", 1000);
+        transactions[1] = new Transaction("Jack Russel", "The Bank of New York", 550);
+        transactions[2] = new Transaction("Antony Green", "Bank of America", 300);
+        transactions[3] = new Transaction("Mary Carry", "The Bank of New York", 250);
 
-        iphone.makePayment(500);
-        samsung.makePayment(300);
-        ipad.makePayment(200);
-        watch.makePayment(55);
-
-        ApplePay.showCard();
-        SamsungPay.showCard();
-        MiPay.showCard();
+        iphone.makePayment(transactions[0]);
+        Transaction.showCardDetails();
+        samsung.makePayment(transactions[1]);
+        Transaction.showCardDetails();
+        ipad.makePayment(transactions[2]);
+        Transaction.showCardDetails();
+        watch.makePayment(transactions[3]);
+        Transaction.showCardDetails();
 
         iphone.sendMessage("Hello Mary! How are you!", mary);
         System.out.println(iphone.getMessage(alex));
 
         Camera iphoneTest = new Phone("Apple", "Iphone 13", batteryApple, 2225548);
         iphoneTest.photograph();
-
 
     /*  System.out.println(iphone.toString() + " HashCode = " + iphone.hashCode());
         System.out.println(samsung.toString() + " HashCode = " + samsung.hashCode());

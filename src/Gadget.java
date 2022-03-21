@@ -98,8 +98,8 @@ public abstract class Gadget implements Messenger, Charger, Calling {
         this.payment = payment;
     }
 
-    public void makePayment(int amount){
-        payment.pay(amount);
+    public final void makePayment(Transaction transaction){
+        payment.pay(transaction);
     }
 
     @Override
