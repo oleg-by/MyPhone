@@ -1,3 +1,5 @@
+package main.java;
+
 public class SmartWatch extends Gadget {
     private float displaySize;
 
@@ -24,7 +26,7 @@ public class SmartWatch extends Gadget {
 
     @Override
     public String toString() {
-        return "SmartWatch{" +
+        return "main.java.SmartWatch{" +
                 "type='" + this.getType() + '\'' +
                 ", brand='" + this.getBrand() + '\'' +
                 ", model='" + this.getModel() + '\'' +

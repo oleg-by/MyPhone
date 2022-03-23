@@ -1,3 +1,7 @@
+package main.java;
+
+import main.java.interfaces.Camera;
+
 public class Phone extends Gadget implements Camera {
     private long phoneNumber;
     private String operatingSystem;
@@ -56,7 +60,7 @@ public class Phone extends Gadget implements Camera {
 
     @Override
     public String toString() {
-        return "Phone{" +
+        return "main.java.Phone{" +
                 "type='" + this.getType() + '\'' +
                 ", brand='" + this.getBrand() + '\'' +
                 ", model='" + this.getModel() + '\'' +

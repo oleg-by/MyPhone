@@ -1,3 +1,5 @@
+package main.java;
+
 public class Battery {
     private int capacity;
     private String typeBattery;
@@ -9,13 +11,21 @@ public class Battery {
         this.capacity = capacity;
     }
 
-    public Battery(int capacity, String typeBattery) {
-        this.capacity = capacity;
-        this.typeBattery = typeBattery;
+    public Battery(int capacity, String typeBattery) throws BatteryException {
+        if (capacity <= 0){
+            throw new BatteryException("The battery capacity is incorrect!");
+        } else {
+            this.capacity = capacity;
+            this.typeBattery = typeBattery;
+        }
     }
 
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
+    public void setCapacity(int capacity) throws BatteryException {
+        if (capacity <= 0){
+            throw new BatteryException("The battery capacity is incorrect!");
+        } else {
+            this.capacity = capacity;
+        }
     }
 
     public void setTypeBattery(String typeBattery) {
@@ -32,7 +42,7 @@ public class Battery {
 
     @Override
     public String toString() {
-        return "Battery{" +
+        return "main.java.Battery{" +
                 "capacity=" + capacity +
                 ", typeBattery='" + typeBattery + '\'' +
                 '}';

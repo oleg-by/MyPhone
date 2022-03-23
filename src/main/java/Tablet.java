@@ -1,3 +1,7 @@
+package main.java;
+
+import main.java.interfaces.Camera;
+
 public class Tablet extends Gadget implements Camera {
     private String operatingSystem;
     private CPU cpu;
@@ -51,7 +55,7 @@ public class Tablet extends Gadget implements Camera {
 
     @Override
     public String toString() {
-        return "Tablet{" +
+        return "main.java.Tablet{" +
                 "type='" + this.getType() + '\'' +
                 ", brand='" + this.getBrand() + '\'' +
                 ", model='" + this.getModel() + '\'' +

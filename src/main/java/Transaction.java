@@ -1,3 +1,5 @@
+package main.java;
+
 import java.util.Date;
 
 public final class Transaction {
@@ -17,11 +19,16 @@ public final class Transaction {
         cvv = 207;
     }
 
-    public Transaction(String payer, String bank, int amount) {
-        this.payer = payer;
-        this.bank = bank;
-        this.amount = amount;
-        operationID = (int) (Math.random() * (2147483647-1000000000)+1000000000);
+    public Transaction(String payer, String bank, int amount) throws AmountTransactionException {
+        if (amount < 0){
+            throw new AmountTransactionException("The amount of transaction is incorrect!");
+        } else {
+            this.payer = payer;
+            this.bank = bank;
+            operationID = (int) (Math.random() * (2147483647-1000000000)+1000000000);
+            this.amount = amount;
+        }
+
     }
 
     public String getPayer() {

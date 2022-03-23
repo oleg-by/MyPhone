@@ -1,3 +1,10 @@
+package main.java;
+
+import main.java.interfaces.Calling;
+import main.java.interfaces.Charger;
+import main.java.interfaces.Messenger;
+import main.java.interfaces.Payment;
+
 import java.text.DecimalFormat;
 
 public abstract class Gadget implements Messenger, Charger, Calling {
@@ -99,16 +106,24 @@ public abstract class Gadget implements Messenger, Charger, Calling {
     }
 
     public final void makePayment(Transaction transaction){
-        payment.pay(transaction);
+        try {
+            payment.pay(transaction);
+        } catch (TransactionException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     @Override
-    public void charge(int chargingCurrent) {
-        System.out.println("Starting to charge the " + this.getType() + ".");
-        DecimalFormat decimalFormat = new DecimalFormat("#.##");
-        float chargingTime = (float) (COEFFICIENT * this.battery.getCapacity() / chargingCurrent);
-        String result = decimalFormat.format(chargingTime);
-        System.out.println("Using this charging current " + chargingCurrent + " (mA), the battery charging time of " + this.getBrand() + " " + this.getModel() + " will be " + result + " h.");
+    public void charge(int chargingCurrent) throws ChargingException {
+        if (chargingCurrent <= 0){
+            throw new ChargingException("The charging current is incorrect!");
+        } else {
+            System.out.println("Starting to charge the " + this.getType() + ".");
+            DecimalFormat decimalFormat = new DecimalFormat("#.##");
+            float chargingTime = (float) (COEFFICIENT * this.battery.getCapacity() / chargingCurrent);
+            String result = decimalFormat.format(chargingTime);
+            System.out.println("Using this charging current " + chargingCurrent + " (mA), the battery charging time of " + this.getBrand() + " " + this.getModel() + " will be " + result + " h.");
+        }
     }
 
 
