@@ -8,7 +8,7 @@ public class Caller {
     }
 
     public Caller(String name, long callerID) throws CallerIDException {
-        if(callerID <= 0 && callerID > 999999999) {
+        if(callerID <= 0) {
             throw new CallerIDException("The caller ID is incorrect.");
         } else {
             this.name = name;
@@ -21,7 +21,7 @@ public class Caller {
     }
 
     public void setCallerID(long callerID) throws CallerIDException {
-        if(callerID <= 0 && callerID > 999999999) {
+        if(callerID <= 0) {
             throw new CallerIDException("The caller ID is incorrect.");
         } else {
             this.callerID = callerID;
@@ -34,5 +34,31 @@ public class Caller {
 
     public long getCallerID() {
         return callerID;
+    }
+
+    @Override
+    public String toString() {
+        return "Caller{" +
+                "name='" + name + '\'' +
+                ", callerID=" + callerID +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Caller caller = (Caller) o;
+
+        if (getCallerID() != caller.getCallerID()) return false;
+        return getName().equals(caller.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getName().hashCode();
+        result = 31 * result + (int) (getCallerID() ^ (getCallerID() >>> 32));
+        return result;
     }
 }

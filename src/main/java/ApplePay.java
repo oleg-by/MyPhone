@@ -1,14 +1,14 @@
 package main.java;
 
-import main.java.interfaces.Payment;
+import main.java.interfaces.Payable;
 
-public class ApplePay implements Payment {
+public class ApplePay implements Payable {
     @Override
-    public void pay(Transaction transaction) throws TransactionException {
+    public String pay(Transaction transaction) throws TransactionException {
         if(transaction == null){
             throw new TransactionException("The transaction is incorrect.");
         } else {
-            System.out.println("The payment was successful through the Apple Pay system. " + transaction.toString());
+            return "The payment was successful through the Apple Pay system. " + transaction.toString();
         }
     }
 }

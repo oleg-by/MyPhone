@@ -51,8 +51,8 @@ public final class Transaction {
         return operationID;
     }
 
-    public static void showCardDetails(){
-        System.out.println(cardNumber + " " + validThru + " " + cvv);
+    public String showCardDetails(){
+        return cardNumber + " " + validThru + " " + cvv;
     }
 
     @Override

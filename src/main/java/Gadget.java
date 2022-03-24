@@ -1,13 +1,18 @@
 package main.java;
 
-import main.java.interfaces.Calling;
-import main.java.interfaces.Charger;
-import main.java.interfaces.Messenger;
-import main.java.interfaces.Payment;
+import main.java.interfaces.Callable;
+import main.java.interfaces.Chargerable;
+import main.java.interfaces.Messengable;
+import main.java.interfaces.Payable;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.text.DecimalFormat;
 
-public abstract class Gadget implements Messenger, Charger, Calling {
+public abstract class Gadget implements Messengable, Chargerable, Callable {
+
+    private static final Logger LOGGER = LogManager.getLogger(Gadget.class);
+
     private String type;
     private String brand;
     private String model;
@@ -15,7 +20,7 @@ public abstract class Gadget implements Messenger, Charger, Calling {
     private String color;
     private int weight;
     private Battery battery;
-    private Payment payment;
+    private Payable payment;
 
     public Gadget() {
 
@@ -97,19 +102,19 @@ public abstract class Gadget implements Messenger, Charger, Calling {
         this.model = model;
     }
 
-    public Payment getPayment() {
+    public Payable getPayment() {
         return payment;
     }
 
-    public void setPayment(Payment payment) {
+    public void setPayment(Payable payment) {
         this.payment = payment;
     }
 
     public final void makePayment(Transaction transaction){
         try {
-            payment.pay(transaction);
+            LOGGER.info(payment.pay(transaction));
         } catch (TransactionException e) {
-            System.err.println(e.getMessage());
+            LOGGER.error(e.getMessage(), e);
         }
     }
 
@@ -118,11 +123,11 @@ public abstract class Gadget implements Messenger, Charger, Calling {
         if (chargingCurrent <= 0){
             throw new ChargingException("The charging current is incorrect!");
         } else {
-            System.out.println("Starting to charge the " + this.getType() + ".");
+            LOGGER.info("Starting to charge the " + this.getType() + ".");
             DecimalFormat decimalFormat = new DecimalFormat("#.##");
-            float chargingTime = (float) (COEFFICIENT * this.battery.getCapacity() / chargingCurrent);
+            float chargingTime = COEFFICIENT * this.battery.getCapacity() / chargingCurrent;
             String result = decimalFormat.format(chargingTime);
-            System.out.println("Using this charging current " + chargingCurrent + " (mA), the battery charging time of " + this.getBrand() + " " + this.getModel() + " will be " + result + " h.");
+            LOGGER.info("Using this charging current " + chargingCurrent + " (mA), the battery charging time of " + this.getBrand() + " " + this.getModel() + " will be " + result + " h.");
         }
     }
 

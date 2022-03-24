@@ -1,8 +1,8 @@
 package main.java;
 
-import main.java.interfaces.Camera;
+import main.java.interfaces.Camerable;
 
-public class Tablet extends Gadget implements Camera {
+public class Tablet extends Gadget implements Camerable {
     private String operatingSystem;
     private CPU cpu;
     private float displaySize;
@@ -49,8 +49,8 @@ public class Tablet extends Gadget implements Camera {
     }
 
     @Override
-    public void photograph(){
-        System.out.println(this.getBrand() + " " + this.getModel() + " can take photos.");
+    public String photograph(){
+        return this.getBrand() + " " + this.getModel() + " can take photos.";
     }
 
     @Override
