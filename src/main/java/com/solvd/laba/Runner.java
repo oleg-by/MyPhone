@@ -1,20 +1,23 @@
-package main.java;
+package main.java.com.solvd.laba;
 
-import main.java.exceptions.AmountTransactionException;
-import main.java.exceptions.BatteryException;
-import main.java.exceptions.CallerIDException;
-import main.java.exceptions.ChargingException;
-import main.java.model.*;
+import main.java.com.solvd.laba.exceptions.AmountTransactionException;
+import main.java.com.solvd.laba.exceptions.BatteryException;
+import main.java.com.solvd.laba.exceptions.CallerIDException;
+import main.java.com.solvd.laba.exceptions.ChargingException;
+import main.java.com.solvd.laba.model.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Scanner;
 
-public class MyPhoneProject {
+public class Runner {
 
-    private static final Logger LOGGER = LogManager.getLogger(MyPhoneProject.class);
+    private static final Logger LOGGER = LogManager.getLogger(Runner.class);
 
     public static void main(String[] args) throws ChargingException, BatteryException, AmountTransactionException, CallerIDException {
 
@@ -69,7 +72,7 @@ public class MyPhoneProject {
 
         // Check the reading data from file
 
-        File file = new File("D:\\dev\\MyPhone\\src\\main\\java\\test");
+        File file = new File("D:\\dev\\MyPhone\\src\\main\\java\\com\\solvd\\laba\\input");
         String str = "";
 
         try (Scanner scanner = new Scanner(file)) {

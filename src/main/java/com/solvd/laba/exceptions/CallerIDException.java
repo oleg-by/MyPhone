@@ -1,4 +1,4 @@
-package main.java.exceptions;
+package main.java.com.solvd.laba.exceptions;
 
 public class CallerIDException extends Exception {
     public CallerIDException() {

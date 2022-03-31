@@ -1,7 +1,7 @@
-package main.java.model;
+package main.java.com.solvd.laba.model;
 
-import main.java.exceptions.TransactionException;
-import main.java.interfaces.Payable;
+import main.java.com.solvd.laba.exceptions.TransactionException;
+import main.java.com.solvd.laba.interfaces.Payable;
 
 public class SamsungPay implements Payable {
     @Override

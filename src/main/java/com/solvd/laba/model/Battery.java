@@ -1,6 +1,6 @@
-package main.java.model;
+package main.java.com.solvd.laba.model;
 
-import main.java.exceptions.BatteryException;
+import main.java.com.solvd.laba.exceptions.BatteryException;
 
 public class Battery {
     private int capacity;

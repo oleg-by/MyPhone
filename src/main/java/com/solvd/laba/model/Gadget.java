@@ -1,11 +1,11 @@
-package main.java.model;
+package main.java.com.solvd.laba.model;
 
-import main.java.exceptions.ChargingException;
-import main.java.exceptions.TransactionException;
-import main.java.interfaces.Callable;
-import main.java.interfaces.Chargerable;
-import main.java.interfaces.Messengable;
-import main.java.interfaces.Payable;
+import main.java.com.solvd.laba.exceptions.ChargingException;
+import main.java.com.solvd.laba.exceptions.TransactionException;
+import main.java.com.solvd.laba.interfaces.Callable;
+import main.java.com.solvd.laba.interfaces.Chargerable;
+import main.java.com.solvd.laba.interfaces.Messengable;
+import main.java.com.solvd.laba.interfaces.Payable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

@@ -1,4 +1,4 @@
-package main.java.model;
+package main.java.com.solvd.laba.model;
 
 public class CPU {
     private String cpuModel;

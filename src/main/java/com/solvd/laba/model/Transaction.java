@@ -1,6 +1,6 @@
-package main.java.model;
+package main.java.com.solvd.laba.model;
 
-import main.java.exceptions.AmountTransactionException;
+import main.java.com.solvd.laba.exceptions.AmountTransactionException;
 
 import java.util.Date;
 

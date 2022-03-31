@@ -1,6 +1,6 @@
-package main.java.model;
+package main.java.com.solvd.laba.model;
 
-import main.java.interfaces.Camerable;
+import main.java.com.solvd.laba.interfaces.Camerable;
 
 public class Phone extends Gadget implements Camerable {
     private long phoneNumber;
