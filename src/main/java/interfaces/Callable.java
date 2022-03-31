@@ -1,6 +1,6 @@
 package main.java.interfaces;
 
-import main.java.Caller;
+import main.java.model.Caller;
 
 public interface Callable {
     default void calling(Caller caller) {

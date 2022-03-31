@@ -1,4 +1,6 @@
-package main.java;
+package main.java.model;
+
+import main.java.exceptions.CallerIDException;
 
 public class Caller {
     private String name;

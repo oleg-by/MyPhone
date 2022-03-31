@@ -1,4 +1,4 @@
-package main.java;
+package main.java.exceptions;
 
 public class TransactionException extends Exception {
     public TransactionException() {

@@ -1,5 +1,6 @@
-package main.java;
+package main.java.model;
 
+import main.java.exceptions.TransactionException;
 import main.java.interfaces.Payable;
 
 public class ApplePay implements Payable {

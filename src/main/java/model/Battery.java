@@ -1,4 +1,6 @@
-package main.java;
+package main.java.model;
+
+import main.java.exceptions.BatteryException;
 
 public class Battery {
     private int capacity;
@@ -42,7 +44,7 @@ public class Battery {
 
     @Override
     public String toString() {
-        return "main.java.Battery{" +
+        return "main.java.model.Battery{" +
                 "capacity=" + capacity +
                 ", typeBattery='" + typeBattery + '\'' +
                 '}';

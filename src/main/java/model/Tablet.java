@@ -1,4 +1,4 @@
-package main.java;
+package main.java.model;
 
 import main.java.interfaces.Camerable;
 
@@ -49,13 +49,13 @@ public class Tablet extends Gadget implements Camerable {
     }
 
     @Override
-    public String photograph(){
+    public String makePhoto(){
         return this.getBrand() + " " + this.getModel() + " can take photos.";
     }
 
     @Override
     public String toString() {
-        return "main.java.Tablet{" +
+        return "main.java.model.Tablet{" +
                 "type='" + this.getType() + '\'' +
                 ", brand='" + this.getBrand() + '\'' +
                 ", model='" + this.getModel() + '\'' +

@@ -1,5 +1,7 @@
-package main.java;
+package main.java.model;
 
+import main.java.exceptions.ChargingException;
+import main.java.exceptions.TransactionException;
 import main.java.interfaces.Callable;
 import main.java.interfaces.Chargerable;
 import main.java.interfaces.Messengable;

@@ -1,4 +1,4 @@
-package main.java;
+package main.java.model;
 
 public class CPU {
     private String cpuModel;
@@ -30,7 +30,7 @@ public class CPU {
 
     @Override
     public String toString() {
-        return "main.java.CPU{" +
+        return "main.java.model.CPU{" +
                 "cpuModel='" + cpuModel + '\'' +
                 ", cpuSpeed=" + cpuSpeed +
                 '}';
