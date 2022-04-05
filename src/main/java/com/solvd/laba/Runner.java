@@ -5,15 +5,14 @@ import main.java.com.solvd.laba.exceptions.BatteryException;
 import main.java.com.solvd.laba.exceptions.CallerIDException;
 import main.java.com.solvd.laba.exceptions.ChargingException;
 import main.java.com.solvd.laba.model.*;
+import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
+import java.io.IOException;
+import java.util.*;
 
 public class Runner {
 
@@ -70,7 +69,7 @@ public class Runner {
             LOGGER.error(e.getMessage());
         }
 
-        // Check the reading data from file
+        // Check the reading data from file (using try with resources)
 
         File file = new File("D:\\dev\\MyPhone\\src\\main\\java\\com\\solvd\\laba\\input");
         String str = "";
@@ -83,7 +82,7 @@ public class Runner {
             LOGGER.error("File Not Found Exception caught!");
         }
 
-        // Check the charging
+        // Check the gadget charging
 
         try {
             int current = Integer.parseInt(str);
@@ -96,5 +95,98 @@ public class Runner {
         } catch (ChargingException e) {
             LOGGER.error(e.getMessage());
         }
+
+        // Calculate the numbers of the unique words using reading from file
+        String path = "D:\\dev\\MyPhone\\src\\main\\java\\com\\solvd\\laba\\article";
+        try {
+            calculateNumberOfUniqueWords(path);
+        } catch (IOException e) {
+            LOGGER.error(e.getMessage());
+        }
+    }
+
+    public static void calculateNumberOfUniqueWords(String path) throws IOException {
+        ArrayList<String> listOfSeparators = new ArrayList<String>();
+        listOfSeparators.add(" ");
+        listOfSeparators.add(",");
+        listOfSeparators.add(".");
+        listOfSeparators.add("!");
+        listOfSeparators.add("?");
+        listOfSeparators.add("(");
+        listOfSeparators.add(")");
+        listOfSeparators.add("[");
+        listOfSeparators.add("]");
+        listOfSeparators.add("-");
+        listOfSeparators.add(";");
+        listOfSeparators.add(":");
+        listOfSeparators.add("/");
+        listOfSeparators.add("\n");
+        listOfSeparators.add("\r");
+        listOfSeparators.add("\t");
+
+        File file = new File(path);
+        List<String> textLines = FileUtils.readLines(file, "UTF-8");
+        String separators = String.join("|\\", listOfSeparators);
+        Map<String, Word> countMap = new TreeMap<String, Word>();
+
+        int i = 0;
+        while (i < textLines.size()) {
+            String[] words = textLines.get(i).split(separators);
+            i++;
+            for (String word : words) {
+                if ("".equals(word)) {
+                    continue;
+                }
+
+                Word wordTemp = countMap.get(word);
+                if (wordTemp == null) {
+                    wordTemp = new Word();
+                    wordTemp.word = word;
+                    wordTemp.counter = 0;
+                    countMap.put(word, wordTemp);
+                }
+
+                wordTemp.counter++;
+            }
+
+        }
+
+        List<Word> wordsByCount = new ArrayList<Word>(countMap.values());
+        Collections.sort(wordsByCount);
+        LOGGER.info("There are " + countMap.size() + " unique words in the article.");
+        File fileOutput = new File("D:\\dev\\MyPhone\\src\\main\\java\\com\\solvd\\laba\\output");
+        FileUtils.writeLines(fileOutput, wordsByCount);
+    }
+
+    public static class Word implements Comparable<Word> {
+        String word;
+        int counter;
+
+        @Override
+        public String toString() {
+            return "{" + word + " - " + counter + "}";
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            Word word1 = (Word) o;
+
+            if (counter != word1.counter) return false;
+            return word.equals(word1.word);
+        }
+
+        @Override
+        public int hashCode() {
+            return word.hashCode();
+        }
+
+        @Override
+        public int compareTo(Word w) {
+            return w.counter - counter;
+        }
+
     }
 }
