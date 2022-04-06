@@ -1,5 +1,8 @@
 package main.java.com.solvd.laba;
 
+import main.java.com.solvd.laba.enums.Brand;
+import main.java.com.solvd.laba.enums.Color;
+import main.java.com.solvd.laba.enums.GadgetType;
 import main.java.com.solvd.laba.exceptions.AmountTransactionException;
 import main.java.com.solvd.laba.exceptions.BatteryException;
 import main.java.com.solvd.laba.exceptions.CallerIDException;
@@ -31,14 +34,14 @@ public class Runner {
         batteryList.add(new Battery(9720, "Li-ion"));
         batteryList.add(new Battery(1094, "Li-ion"));
 
-        Phone iphone = new Phone("phone", "Apple", "Iphone 13 PRO MAX", "160.8 x 78.1 x 7.7", "white", 240, batteryList.get(0), 291112233, "iOS", cpuList.get(0));
-        LOGGER.info("The object has been created. " + iphone.toString() + ".");
-        Phone samsung = new Phone("phone", "Samsung", "Galaxy S22 Ultra", "163.3 x 77.9 x 8.9", "blue", 229, batteryList.get(1), 447775566, "Android", cpuList.get(1));
-        LOGGER.info("The object has been created. " + samsung.toString() + ".");
-        Tablet ipad = new Tablet("tablet", "Apple", "iPad Pro", "280.6 x 214.9 x 6.4", "silver", 684, batteryList.get(2), "iPadOS 15", cpuList.get(2), (float) 12.9);
-        LOGGER.info("The object has been created. " + ipad.toString() + ".");
-        SmartWatch watch = new SmartWatch("smart watch", "Apple", "Watch Series 7", "45 x 38 x 10.7", "grey", 39, batteryList.get(3), (float) 1.9);
-        LOGGER.info("The object has been created." + watch.toString() + ".");
+        Phone iphone = new Phone(GadgetType.PHONE, Brand.APPLE, "Iphone 13 PRO MAX", "160.8 x 78.1 x 7.7", Color.WHITE, 240, batteryList.get(0), 291112233, "iOS", cpuList.get(0));
+        LOGGER.info("The object has been created. " + iphone + ".");
+        Phone samsung = new Phone(GadgetType.PHONE, Brand.SAMSUNG, "Galaxy S22 Ultra", "163.3 x 77.9 x 8.9", Color.BLUE, 229, batteryList.get(1), 447775566, "Android", cpuList.get(1));
+        LOGGER.info("The object has been created. " + samsung + ".");
+        Tablet ipad = new Tablet(GadgetType.TABLET, Brand.APPLE, "iPad Pro", "280.6 x 214.9 x 6.4", Color.SILVER, 684, batteryList.get(2), "iPadOS 15", cpuList.get(2), (float) 12.9);
+        LOGGER.info("The object has been created. " + ipad + ".");
+        SmartWatch watch = new SmartWatch(GadgetType.WATCH, Brand.APPLE, "Watch Series 7", "45 x 38 x 10.7", Color.GREY, 39, batteryList.get(3), (float) 1.9);
+        LOGGER.info("The object has been created." + watch + ".");
         Caller alex = new Caller("Alex", iphone.getPhoneNumber());
         Caller mary = new Caller("Mary", samsung.getPhoneNumber());
 
@@ -106,7 +109,7 @@ public class Runner {
     }
 
     public static void calculateNumberOfUniqueWords(String path) throws IOException {
-        ArrayList<String> listOfSeparators = new ArrayList<String>();
+        ArrayList<String> listOfSeparators = new ArrayList<>();
         listOfSeparators.add(" ");
         listOfSeparators.add(",");
         listOfSeparators.add(".");
@@ -127,7 +130,7 @@ public class Runner {
         File file = new File(path);
         List<String> textLines = FileUtils.readLines(file, "UTF-8");
         String separators = String.join("|\\", listOfSeparators);
-        Map<String, Word> countMap = new TreeMap<String, Word>();
+        Map<String, Word> countMap = new TreeMap<>();
 
         int i = 0;
         while (i < textLines.size()) {
@@ -151,7 +154,7 @@ public class Runner {
 
         }
 
-        List<Word> wordsByCount = new ArrayList<Word>(countMap.values());
+        List<Word> wordsByCount = new ArrayList<>(countMap.values());
         Collections.sort(wordsByCount);
         LOGGER.info("There are " + countMap.size() + " unique words in the article.");
         File fileOutput = new File("D:\\dev\\MyPhone\\src\\main\\java\\com\\solvd\\laba\\output");

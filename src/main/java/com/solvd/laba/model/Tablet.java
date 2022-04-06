@@ -1,5 +1,8 @@
 package main.java.com.solvd.laba.model;
 
+import main.java.com.solvd.laba.enums.Brand;
+import main.java.com.solvd.laba.enums.Color;
+import main.java.com.solvd.laba.enums.GadgetType;
 import main.java.com.solvd.laba.interfaces.Camerable;
 
 public class Tablet extends Gadget implements Camerable {
@@ -10,14 +13,14 @@ public class Tablet extends Gadget implements Camerable {
     public Tablet() {
     }
 
-    public Tablet(String brand, String model, Battery battery, String operatingSystem, CPU cpu, float displaySize) {
+    public Tablet(Brand brand, String model, Battery battery, String operatingSystem, CPU cpu, float displaySize) {
         super(brand, model, battery);
         this.operatingSystem = operatingSystem;
         this.cpu = cpu;
         this.displaySize = displaySize;
     }
 
-    public Tablet(String type, String brand, String model, String dimensions, String color, int weight, Battery battery, String operatingSystem, CPU cpu, float displaySize) {
+    public Tablet(GadgetType type, Brand brand, String model, String dimensions, Color color, int weight, Battery battery, String operatingSystem, CPU cpu, float displaySize) {
         super(type, brand, model, dimensions, color, weight, battery);
         this.operatingSystem = operatingSystem;
         this.cpu = cpu;

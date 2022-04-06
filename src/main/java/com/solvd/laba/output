@@ -49,7 +49,6 @@
 {specified - 3}
 {this - 3}
 {value - 3}
-{"standard" - 2}
 {All - 2}
 {ClassCastException - 2}
 {Comparable - 2}
@@ -77,6 +76,7 @@
 {their - 2}
 {throw - 2}
 {whose - 2}
+{"standard" - 1}
 {Attempts - 1}
 {For - 1}
 {Furthermore - 1}
@@ -179,6 +179,7 @@
 {returned - 1}
 {several - 1}
 {should - 1}
+{standard - 1}
 {standpoint - 1}
 {strings - 1}
 {submaps - 1}

@@ -1,17 +1,21 @@
 package main.java.com.solvd.laba.model;
 
+import main.java.com.solvd.laba.enums.Brand;
+import main.java.com.solvd.laba.enums.Color;
+import main.java.com.solvd.laba.enums.GadgetType;
+
 public class SmartWatch extends Gadget {
     private float displaySize;
 
     public SmartWatch() {
     }
 
-    public SmartWatch(String brand, String model, Battery battery, float displaySize) {
+    public SmartWatch(Brand brand, String model, Battery battery, float displaySize) {
         super(brand, model, battery);
         this.displaySize = displaySize;
     }
 
-    public SmartWatch(String type, String brand, String model, String dimensions, String color, int weight, Battery battery, float displaySize) {
+    public SmartWatch(GadgetType type, Brand brand, String model, String dimensions, Color color, int weight, Battery battery, float displaySize) {
         super(type, brand, model, dimensions, color, weight, battery);
         this.displaySize = displaySize;
     }
