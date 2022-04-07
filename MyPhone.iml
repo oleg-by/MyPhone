@@ -26,22 +26,16 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="resources" level="project" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="file://$MODULE_DIR$/../commons-io-2.11.0" />
+          <root url="jar://$MODULE_DIR$/../commons-io-2.11.0/commons-io-2.11.0.jar!/" />
         </CLASSES>
-        <JAVADOC>
-          <root url="file://$MODULE_DIR$/../commons-io-2.11.0/docs" />
-        </JAVADOC>
-        <SOURCES>
-          <root url="file://$MODULE_DIR$/../commons-io-2.11.0" />
-        </SOURCES>
-        <jarDirectory url="file://$MODULE_DIR$/../commons-io-2.11.0" recursive="false" />
-        <jarDirectory url="file://$MODULE_DIR$/../commons-io-2.11.0" recursive="false" type="SOURCES" />
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="resources" level="project" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>

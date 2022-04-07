@@ -7,6 +7,8 @@ import main.java.com.solvd.laba.exceptions.AmountTransactionException;
 import main.java.com.solvd.laba.exceptions.BatteryException;
 import main.java.com.solvd.laba.exceptions.CallerIDException;
 import main.java.com.solvd.laba.exceptions.ChargingException;
+import main.java.com.solvd.laba.interfaces.ICall;
+import main.java.com.solvd.laba.interfaces.ICharge;
 import main.java.com.solvd.laba.model.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
@@ -16,6 +18,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
+import java.util.function.Function;
 
 public class Runner {
 
@@ -41,7 +44,7 @@ public class Runner {
         Tablet ipad = new Tablet(GadgetType.TABLET, Brand.APPLE, "iPad Pro", "280.6 x 214.9 x 6.4", Color.SILVER, 684, batteryList.get(2), "iPadOS 15", cpuList.get(2), (float) 12.9);
         LOGGER.info("The object has been created. " + ipad + ".");
         SmartWatch watch = new SmartWatch(GadgetType.WATCH, Brand.APPLE, "Watch Series 7", "45 x 38 x 10.7", Color.GREY, 39, batteryList.get(3), (float) 1.9);
-        LOGGER.info("The object has been created." + watch + ".");
+        LOGGER.info("The object has been created. " + watch + ".");
         Caller alex = new Caller("Alex", iphone.getPhoneNumber());
         Caller mary = new Caller("Mary", samsung.getPhoneNumber());
 
@@ -88,7 +91,8 @@ public class Runner {
         // Check the gadget charging
 
         try {
-            int current = Integer.parseInt(str);
+            Function<String, Integer> valueConverter = x -> Integer.valueOf(x);
+            int current = valueConverter.apply(str);
             gadgets.get(0).charge(current);
             gadgets.get(1).charge(current);
             gadgets.get(2).charge(current);
@@ -100,11 +104,29 @@ public class Runner {
         }
 
         // Calculate the numbers of the unique words using reading from file
+
         String path = "D:\\dev\\MyPhone\\src\\main\\java\\com\\solvd\\laba\\article";
         try {
             calculateNumberOfUniqueWords(path);
         } catch (IOException e) {
             LOGGER.error(e.getMessage());
+        }
+
+        // Check the custom Functional Interfaces
+
+        ICall<Caller, String> call = x -> "I'm calling " + x.getName() + "'s phone number " + x.getCallerID() + ".";
+        LOGGER.info(call.callPhoneNumber(alex));
+        LOGGER.info(call.callPhoneNumber(mary));
+
+        ICharge<Gadget> myCharge = x -> x.isCharged = true;
+        myCharge.chargeGadget(iphone);
+        myCharge.chargeGadget(ipad);
+        myCharge.chargeGadget(samsung);
+        myCharge.chargeGadget(watch);
+        if(iphone.isCharged && ipad.isCharged && samsung.isCharged && watch.isCharged){
+            LOGGER.info("The charging of my devices was successfully.");
+        } else {
+            LOGGER.info("Try again!");
         }
     }
 

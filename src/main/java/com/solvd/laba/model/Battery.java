@@ -44,7 +44,7 @@ public class Battery {
 
     @Override
     public String toString() {
-        return "main.java.model.Battery{" +
+        return "Battery{" +
                 "capacity=" + capacity +
                 ", typeBattery='" + typeBattery + '\'' +
                 '}';

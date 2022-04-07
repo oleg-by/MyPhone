@@ -63,7 +63,7 @@ public class Phone extends Gadget implements Camerable {
 
     @Override
     public String toString() {
-        return "main.java.model.Phone{" +
+        return "Phone{" +
                 "type='" + this.getType() + '\'' +
                 ", brand='" + this.getBrand() + '\'' +
                 ", model='" + this.getModel() + '\'' +

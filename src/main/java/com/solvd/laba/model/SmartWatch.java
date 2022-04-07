@@ -30,7 +30,7 @@ public class SmartWatch extends Gadget {
 
     @Override
     public String toString() {
-        return "main.java.model.SmartWatch{" +
+        return "SmartWatch{" +
                 "type='" + this.getType() + '\'' +
                 ", brand='" + this.getBrand() + '\'' +
                 ", model='" + this.getModel() + '\'' +

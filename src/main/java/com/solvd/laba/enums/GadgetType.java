@@ -21,8 +21,6 @@ public enum GadgetType {
 
     @Override
     public String toString() {
-        return "GadgetType{" +
-                "type='" + type + '\'' +
-                '}';
+        return type;
     }
 }

@@ -30,7 +30,7 @@ public class CPU {
 
     @Override
     public String toString() {
-        return "main.java.model.CPU{" +
+        return "CPU{" +
                 "cpuModel='" + cpuModel + '\'' +
                 ", cpuSpeed=" + cpuSpeed +
                 '}';

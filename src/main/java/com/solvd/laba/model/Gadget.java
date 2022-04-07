@@ -27,6 +27,8 @@ public abstract class Gadget implements Messengable, Chargerable, Callable {
     private Battery battery;
     private Payable payment;
 
+    public boolean isCharged = false;
+
     public Gadget() {
 
     }

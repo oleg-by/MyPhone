@@ -58,7 +58,7 @@ public class Tablet extends Gadget implements Camerable {
 
     @Override
     public String toString() {
-        return "main.java.model.Tablet{" +
+        return "Tablet{" +
                 "type='" + this.getType() + '\'' +
                 ", brand='" + this.getBrand() + '\'' +
                 ", model='" + this.getModel() + '\'' +
