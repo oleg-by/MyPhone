@@ -8,7 +8,7 @@ import main.java.com.solvd.laba.interfaces.Camerable;
 public class Phone extends Gadget implements Camerable {
     private long phoneNumber;
     private String operatingSystem;
-    private CPU cpu;
+    private Cpu cpu;
 
     public Phone() {
     }
@@ -18,14 +18,14 @@ public class Phone extends Gadget implements Camerable {
         this.phoneNumber = phoneNumber;
     }
 
-    public Phone(Brand brand, String model, Battery battery, long phoneNumber, String operatingSystem, CPU cpu) {
+    public Phone(Brand brand, String model, Battery battery, long phoneNumber, String operatingSystem, Cpu cpu) {
         super(brand, model, battery);
         this.phoneNumber = phoneNumber;
         this.operatingSystem = operatingSystem;
         this.cpu = cpu;
     }
 
-    public Phone(GadgetType type, Brand brand, String model, String dimensions, Color color, int weight, Battery battery, long phoneNumber, String operatingSystem, CPU cpu) {
+    public Phone(GadgetType type, Brand brand, String model, String dimensions, Color color, int weight, Battery battery, long phoneNumber, String operatingSystem, Cpu cpu) {
         super(type, brand, model, dimensions, color, weight, battery);
         this.phoneNumber = phoneNumber;
         this.operatingSystem = operatingSystem;
@@ -40,7 +40,7 @@ public class Phone extends Gadget implements Camerable {
         this.operatingSystem = operatingSystem;
     }
 
-    public void setCpu(CPU cpu) {
+    public void setCpu(Cpu cpu) {
         this.cpu = cpu;
     }
 
@@ -52,7 +52,7 @@ public class Phone extends Gadget implements Camerable {
         return operatingSystem;
     }
 
-    public CPU getCpu() {
+    public Cpu getCpu() {
         return cpu;
     }
 

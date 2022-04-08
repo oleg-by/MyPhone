@@ -21,7 +21,6 @@ main\java\com\solvd\laba\enums\Color.class
 main\java\com\solvd\laba\exceptions\BatteryException.class
 main\java\com\solvd\laba\model\DefaultPay.class
 main\java\com\solvd\laba\model\Phone.class
-main\java\com\solvd\laba\Runner$Word.class
 main\java\com\solvd\laba\enums\GadgetType.class
 main\java\com\solvd\laba\exceptions\TransactionException.class
 main\java\com\solvd\laba\interfaces\ICall.class

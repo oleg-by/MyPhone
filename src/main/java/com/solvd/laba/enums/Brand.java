@@ -9,18 +9,18 @@ public enum Brand {
     SONY("Sony"),
     HONOR("Honor");
 
-    private final String brand;
+    private final String name;
 
-    Brand(String brand) {
-        this.brand = brand;
+    Brand(String name) {
+        this.name = name;
     }
 
-    public String getBrand() {
-        return brand;
+    public String getName() {
+        return name;
     }
 
     @Override
     public String toString() {
-        return brand;
+        return name;
     }
 }

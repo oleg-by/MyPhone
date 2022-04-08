@@ -7,20 +7,20 @@ import main.java.com.solvd.laba.interfaces.Camerable;
 
 public class Tablet extends Gadget implements Camerable {
     private String operatingSystem;
-    private CPU cpu;
+    private Cpu cpu;
     private float displaySize;
 
     public Tablet() {
     }
 
-    public Tablet(Brand brand, String model, Battery battery, String operatingSystem, CPU cpu, float displaySize) {
+    public Tablet(Brand brand, String model, Battery battery, String operatingSystem, Cpu cpu, float displaySize) {
         super(brand, model, battery);
         this.operatingSystem = operatingSystem;
         this.cpu = cpu;
         this.displaySize = displaySize;
     }
 
-    public Tablet(GadgetType type, Brand brand, String model, String dimensions, Color color, int weight, Battery battery, String operatingSystem, CPU cpu, float displaySize) {
+    public Tablet(GadgetType type, Brand brand, String model, String dimensions, Color color, int weight, Battery battery, String operatingSystem, Cpu cpu, float displaySize) {
         super(type, brand, model, dimensions, color, weight, battery);
         this.operatingSystem = operatingSystem;
         this.cpu = cpu;
@@ -31,7 +31,7 @@ public class Tablet extends Gadget implements Camerable {
         this.operatingSystem = operatingSystem;
     }
 
-    public void setCpu(CPU cpu) {
+    public void setCpu(Cpu cpu) {
         this.cpu = cpu;
     }
 
@@ -43,7 +43,7 @@ public class Tablet extends Gadget implements Camerable {
         return operatingSystem;
     }
 
-    public CPU getCpu() {
+    public Cpu getCpu() {
         return cpu;
     }
 

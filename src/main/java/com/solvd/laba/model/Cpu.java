@@ -1,13 +1,13 @@
 package main.java.com.solvd.laba.model;
 
-public class CPU {
+public class Cpu {
     private String cpuModel;
     private int cpuSpeed;
 
-    public CPU() {
+    public Cpu() {
     }
 
-    public CPU(String cpuModel, int cpuSpeed) {
+    public Cpu(String cpuModel, int cpuSpeed) {
         this.cpuModel = cpuModel;
         this.cpuSpeed = cpuSpeed;
     }
@@ -41,7 +41,7 @@ public class CPU {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
 
-        CPU cpu = (CPU) obj;
+        Cpu cpu = (Cpu) obj;
 
         if (getCpuSpeed() != cpu.getCpuSpeed()) return false;
         return getCpuModel() != null ? getCpuModel().equals(cpu.getCpuModel()) : cpu.getCpuModel() == null;
