@@ -1,4 +1,4 @@
-package main.java.com.solvd.laba.interfaces;
+package main.java.com.solvd.laba.interfaces.functional;
 
 @FunctionalInterface
 public interface ICall<T, K> {

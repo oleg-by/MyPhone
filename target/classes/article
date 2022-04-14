@@ -3,7 +3,6 @@ The map is ordered according to the natural ordering of its keys, or by a Compar
 This order is reflected when iterating over the sorted map's collection views (returned by the entrySet, keySet and values methods).
 Several additional operations are provided to take advantage of the ordering. (This interface is the map analogue of SortedSet.)
 All keys inserted into a sorted map must implement the Comparable interface (or be accepted by the specified comparator).
-Furthermore, all such keys must be mutually comparable: k1.compareTo(k2) (or comparator.compare(k1, k2)) must not throw a ClassCastException for any keys k1 and k2 in the sorted map.
 Attempts to violate this restriction will cause the offending method or constructor invocation to throw a ClassCastException.
 Note that the ordering maintained by a sorted map (whether or not an explicit comparator is provided) must be consistent with equals if the sorted map is to correctly implement the Map interface. (See the Comparable interface or Comparator interface for a precise definition of consistent with equals.)
 This is so because the Map interface is defined in terms of the equals operation, but a sorted map performs all key comparisons using its compareTo (or compare) method, so two keys that are deemed equal by this method are, from the standpoint of the sorted map, equal.

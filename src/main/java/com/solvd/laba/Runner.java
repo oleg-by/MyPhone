@@ -7,8 +7,8 @@ import main.java.com.solvd.laba.exceptions.AmountTransactionException;
 import main.java.com.solvd.laba.exceptions.BatteryException;
 import main.java.com.solvd.laba.exceptions.CallerIDException;
 import main.java.com.solvd.laba.exceptions.ChargingException;
-import main.java.com.solvd.laba.interfaces.ICall;
-import main.java.com.solvd.laba.interfaces.ICharge;
+import main.java.com.solvd.laba.interfaces.functional.*;
+import main.java.com.solvd.laba.linkedlist.LinkedList;
 import main.java.com.solvd.laba.model.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -20,6 +20,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Runner {
 
@@ -28,7 +29,7 @@ public class Runner {
     public static void main(String[] args) throws ChargingException, AmountTransactionException, BatteryException, CallerIDException {
 
         // Create the objects and add them to a custom Linked List
-        LinkedList<Gadget> gadgets = createObjects();
+        List<Gadget> gadgets = createObjects();
 
         // Check the payment systems of objects (gadgets)
         checkPayment(gadgets);
@@ -36,58 +37,77 @@ public class Runner {
         // Check the gadget charging of objects (gadgets)
         checkCharging(gadgets);
 
+        // Check the using custom LinkedList
+        checkMyLinkedList(gadgets);
+
         // Check the using custom Functional Interfaces
         checkFunctionalInterface(gadgets);
 
         // Calculate the numbers of the unique words using reading from file
         calculateNumberOfUniqueWords();
+
+        // Check the using Stream
+        checkMyStreams(gadgets);
     }
 
-    public static LinkedList<Gadget> createObjects() throws BatteryException {
+    public static List<Gadget> createObjects() throws BatteryException {
         List<Cpu> cpuList = new ArrayList<>();
         cpuList.add(new Cpu("Apple A15 Bionic", 3240));
         cpuList.add(new Cpu("Qualcomm Snapdragon 8 Gen1", 3000));
         cpuList.add(new Cpu("Apple M1", 3200));
+        cpuList.add(new Cpu("Qualcomm Snapdragon 888", 2840));
+        cpuList.add(new Cpu("HiSilicon Kirin 990 5G", 2860));
+
         List<Battery> batteryList = new ArrayList<>();
         batteryList.add(new Battery(4325, "Li-ion"));
         batteryList.add(new Battery(5000, "Li-ion"));
         batteryList.add(new Battery(9720, "Li-ion"));
         batteryList.add(new Battery(1094, "Li-ion"));
+        batteryList.add(new Battery(4360, "Li-ion"));
+        batteryList.add(new Battery(4500, "Li-ion"));
+        batteryList.add(new Battery(4000, "Li-ion"));
 
         //Using enums fields
         Phone iphone = new Phone(GadgetType.PHONE, Brand.APPLE, "Iphone 13 PRO MAX", "160.8 x 78.1 x 7.7", Color.WHITE, 240, batteryList.get(0), 291112233, "iOS", cpuList.get(0));
         Phone samsung = new Phone(GadgetType.PHONE, Brand.SAMSUNG, "Galaxy S22 Ultra", "163.3 x 77.9 x 8.9", Color.BLUE, 229, batteryList.get(1), 447775566, "Android", cpuList.get(1));
         Tablet ipad = new Tablet(GadgetType.TABLET, Brand.APPLE, "iPad Pro", "280.6 x 214.9 x 6.4", Color.SILVER, 684, batteryList.get(2), "iPadOS 15", cpuList.get(2), (float) 12.9);
         SmartWatch watch = new SmartWatch(GadgetType.WATCH, Brand.APPLE, "Watch Series 7", "45 x 38 x 10.7", Color.GREY, 39, batteryList.get(3), (float) 1.9);
+        Phone xiaomi = new Phone(GadgetType.PHONE, Brand.XIAOMI, "Xiaomi Mi 11 Ultra", "164.3 x 74.6 x 8.38", Color.WHITE, 234, batteryList.get(1), 296666222, "Android", cpuList.get(3));
+        Phone huawei = new Phone(GadgetType.PHONE, Brand.HUAWEI, "Huawei P50 Pro", "158.8 x 72.8 x 8.5", Color.GREEN, 195, batteryList.get(4), 335059905, "Android", cpuList.get(3));
+        Phone sony = new Phone(GadgetType.PHONE, Brand.SONY, "Sony Xperia Pro-I", "166 x 72 x 8.9", Color.SILVER, 211, batteryList.get(5), 296060103, "Android", cpuList.get(3));
+        Phone honor = new Phone(GadgetType.PHONE, Brand.HONOR, "HONOR 30 Pro+", "160.3 x 73.6 x 8.38", Color.BLACK, 190, batteryList.get(6), 332020327, "Android", cpuList.get(4));
 
-        //Use custom LinkedList
-        LinkedList<Gadget> myGadgets = new LinkedList<>();
-        myGadgets.addLast(iphone);
-        myGadgets.addLast(samsung);
-        myGadgets.addLast(ipad);
-        myGadgets.addLast(watch);
+        List<Gadget> myGadgets = new ArrayList<>();
+        myGadgets.add(iphone);
+        myGadgets.add(samsung);
+        myGadgets.add(ipad);
+        myGadgets.add(watch);
+        myGadgets.add(xiaomi);
+        myGadgets.add(huawei);
+        myGadgets.add(sony);
+        myGadgets.add(honor);
         LOGGER.info("The " + myGadgets.size() + " objects have been created.");
         return myGadgets;
     }
 
-    public static void checkPayment(LinkedList<Gadget> myGadgets) {
+    public static void checkPayment(List<Gadget> myGadgets) {
         try {
             List<Transaction> transactionList = new ArrayList<>();
             transactionList.add(new Transaction("John Brown", "Bank of America", 50));
             transactionList.add(new Transaction("Jack Russel", "The Bank of New York", 550));
             transactionList.add(new Transaction("Antony Green", "Bank of America", 300));
             transactionList.add(new Transaction("Mary Carry", "The Bank of New York", 250));
-            myGadgets.get(0).makePayment(transactionList.get(0));
-            myGadgets.get(1).makePayment(transactionList.get(1));
-            myGadgets.get(2).makePayment(transactionList.get(2));
-            myGadgets.get(3).makePayment(transactionList.get(3));
+            for (Gadget g : myGadgets) {
+                int i = (int) (3 * Math.random());
+                g.makePayment(transactionList.get(i));
+            }
         } catch (AmountTransactionException e) {
             LOGGER.error(e.getMessage());
         }
     }
 
-    public static void checkCharging(LinkedList<Gadget> myGadgets) throws ChargingException {
-        File file = new File("D:\\dev\\MyPhone\\src\\main\\java\\com\\solvd\\laba\\input");
+    public static void checkCharging(List<Gadget> myGadgets) throws ChargingException {
+        File file = new File("D:\\dev\\MyPhone\\src\\main\\resources\\inputCurrent");
         String str = "";
         // Read data from file (using try with resources)
         try (Scanner scanner = new Scanner(file)) {
@@ -98,13 +118,12 @@ public class Runner {
             LOGGER.error("File Not Found Exception caught!");
         }
         try {
-            // Use lambda
+            // Use lambda with F.I. Function
             Function<String, Integer> valueConverter = Integer::valueOf;
             int current = valueConverter.apply(str);
-            myGadgets.get(0).charge(current);
-            myGadgets.get(1).charge(current);
-            myGadgets.get(2).charge(current);
-            myGadgets.get(3).charge(current);
+            for (Gadget g : myGadgets) {
+                g.charge(current);
+            }
         } catch (NumberFormatException exception) {
             throw new ChargingException("The string you entered is incorrect.");
         } catch (ChargingException e) {
@@ -112,7 +131,22 @@ public class Runner {
         }
     }
 
-    public static void checkFunctionalInterface(LinkedList<Gadget> myGadgets) throws CallerIDException {
+    public static void checkMyLinkedList(List<Gadget> myGadgets) throws BatteryException {
+        LinkedList<Gadget> myLinkedList = new LinkedList<>();
+        for (Gadget g : myGadgets) {
+            myLinkedList.addLast(g);
+        }
+        LOGGER.info(myLinkedList);
+        LOGGER.info("The size of my custom Linked List: " + myLinkedList.getSize());
+        myLinkedList.remove(myGadgets.get(2));
+        LOGGER.info("The size of my custom Linked List after deleting one element: " + myLinkedList.getSize());
+        Phone xiaomiTest = new Phone(GadgetType.PHONE, Brand.XIAOMI, "Xiaomi Mi 11 Ultra", "164.3 x 74.6 x 8.38", Color.BLUE, 234, new Battery(5000, "Li-ion"), 293323666, "Android", new Cpu("Qualcomm Snapdragon 888", 2840));
+        myLinkedList.addFirst(xiaomiTest);
+        LOGGER.info(myLinkedList);
+        LOGGER.info("The size of my custom Linked List after adding one element: " + myLinkedList.getSize());
+    }
+
+    public static void checkFunctionalInterface(List<Gadget> myGadgets) throws CallerIDException {
         Caller alex = new Caller("Alex", 291112233);
         Caller mary = new Caller("Mary", 447775566);
 
@@ -121,64 +155,94 @@ public class Runner {
         LOGGER.info(call.callPhoneNumber(mary));
 
         ICharge<Gadget> myCharge = x -> x.isCharged = true;
-        myCharge.chargeGadget(myGadgets.get(0));
-        myCharge.chargeGadget(myGadgets.get(1));
-        myCharge.chargeGadget(myGadgets.get(2));
-        myCharge.chargeGadget(myGadgets.get(3));
+        for (Gadget g : myGadgets) {
+            myCharge.chargeGadget(g);
+        }
         if (myGadgets.get(0).isCharged && myGadgets.get(1).isCharged && myGadgets.get(2).isCharged && myGadgets.get(3).isCharged) {
             LOGGER.info("The charging of my devices was successfully.");
         } else {
             LOGGER.info("Try again!");
         }
+
+        IFormat f = x -> "+375" + x;
+        LOGGER.info(f.formatNumber(alex.getCallerID()));
+        LOGGER.info(f.formatNumber(mary.getCallerID()));
+
+        ICompare<Phone, Phone> test = (x, y) -> {
+            int xPointer = 0;
+            int yPointer = 0;
+            if (x.getWeight() < y.getWeight()) {
+                xPointer++;
+            } else if (x.getWeight() != y.getWeight()) {
+                yPointer++;
+            }
+            if (x.getBattery().getCapacity() > y.getBattery().getCapacity()) {
+                xPointer++;
+            } else if (x.getBattery().getCapacity() != y.getBattery().getCapacity()) {
+                yPointer++;
+            }
+            if (x.getCpu().getCpuSpeed() > y.getCpu().getCpuSpeed()) {
+                xPointer++;
+            } else if (x.getCpu().getCpuSpeed() != y.getCpu().getCpuSpeed()) {
+                yPointer++;
+            }
+            if (xPointer > yPointer) {
+                return x.getModel() + " is better than " + y.getModel();
+            } else if (xPointer == yPointer) {
+                return "The characteristics of the models are similar.";
+            } else return y.getModel() + " is better than " + x.getModel();
+        };
+        LOGGER.info(test.compareGadgets((Phone) myGadgets.get(0), (Phone) myGadgets.get(1)));
+
+        IConvert inchToCm = x -> (float) 2.54 * x;
+        LOGGER.info("12.9 in. is equal to " + inchToCm.convertDisplaySize((float) 12.9) + " cm.");
     }
 
     public static void calculateNumberOfUniqueWords() {
-        String path = "D:\\dev\\MyPhone\\src\\main\\java\\com\\solvd\\laba\\article";
-        ArrayList<String> listOfSeparators = new ArrayList<>();
-        listOfSeparators.add(" ");
-        listOfSeparators.add(",");
-        listOfSeparators.add(".");
-        listOfSeparators.add("!");
-        listOfSeparators.add("?");
-        listOfSeparators.add("(");
-        listOfSeparators.add(")");
-        listOfSeparators.add("[");
-        listOfSeparators.add("]");
-        listOfSeparators.add("-");
-        listOfSeparators.add(";");
-        listOfSeparators.add(":");
-        listOfSeparators.add("/");
-        listOfSeparators.add("}");
-        listOfSeparators.add("{");
-        listOfSeparators.add("\n");
-        listOfSeparators.add("\r");
-        listOfSeparators.add("\t");
+        String path = "D:\\dev\\MyPhone\\src\\main\\resources\\article";
         File file = new File(path);
         String text = null;
         try {
-            text = StringUtils.lowerCase(FileUtils.readFileToString(file, "UTF-8"));
+            text = StringUtils.lowerCase(FileUtils.readFileToString(file, "UTF-8")).replaceAll("[^\\da-zA-Zа-яёА-ЯЁ ]", "");
         } catch (IOException e) {
             LOGGER.error(e.getMessage());
         }
-        String separators = String.join("|\\", listOfSeparators);
-        String[] words = StringUtils.split(text, separators);
+        String[] words = new String[0];
+        if (text != null) {
+            words = text.split(" ");
+        }
         Map<String, Integer> map = new TreeMap<>();
-        if (words != null) {
-            for (String word : words) {
-                map.put(word, StringUtils.countMatches(text, word));
-            }
+        for (String word : words) {
+            map.put(word, StringUtils.countMatches(text, word));
         }
         LOGGER.info("There are " + map.size() + " unique words in the article.");
-        LOGGER.info("Please, see the OUTPUT file in your directory \\main\\java\\com\\solvd\\laba.");
+        LOGGER.info("Please, see the OUTPUT file in your directory \\main\\resources.");
         List<String> result = new ArrayList<>();
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
             result.add(entry.getKey() + " - " + entry.getValue());
         }
-        File fileOutput = new File("D:\\dev\\MyPhone\\src\\main\\java\\com\\solvd\\laba\\output");
+        File fileOutput = new File("D:\\dev\\MyPhone\\src\\main\\resources\\output");
         try {
             FileUtils.writeLines(fileOutput, result);
         } catch (IOException e) {
             LOGGER.error(e.getMessage());
+        }
+    }
+
+    public static void checkMyStreams(List<Gadget> myGadgets) {
+        // Show objects that have a battery size greater than 5000, and sorted by them weight.
+        LOGGER.info("#1");
+        myGadgets.stream()
+                .filter(gadget -> gadget.getBattery().getCapacity() >= 5000)
+                .sorted(Comparator.comparing(Gadget::getWeight))
+                .forEach(LOGGER::info);
+
+        // Create List of objects "Apple".
+        LOGGER.info("#2");
+        List<Gadget> appleList = myGadgets.stream()
+                .filter(gadget -> gadget.getBrand().getName().equals("Apple")).collect(Collectors.toList());
+        for (Gadget g : appleList) {
+            LOGGER.info(g);
         }
     }
 }

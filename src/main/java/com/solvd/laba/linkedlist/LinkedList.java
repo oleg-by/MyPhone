@@ -3,16 +3,19 @@ package main.java.com.solvd.laba.linkedlist;
 public class LinkedList<T> {
 
     private Node<T> head;
+    private static int size = 0;
 
     public void addFirst(T t) {
         Node<T> firstNode = new Node<>(t);
         firstNode.next = head;
         head = firstNode;
+        size++;
     }
 
     public void addLast(T t) {
         if (head == null) {
             head = new Node<>(t);
+            size++;
             return;
         }
         Node<T> currentNode = head;
@@ -20,6 +23,7 @@ public class LinkedList<T> {
             currentNode = currentNode.next;
         }
         currentNode.next = new Node<>(t);
+        size++;
     }
 
     public int get(T t) {
@@ -48,6 +52,7 @@ public class LinkedList<T> {
         }
         if (head.value == t) {
             head = head.next;
+            size--;
             return;
         }
 
@@ -55,10 +60,16 @@ public class LinkedList<T> {
         while (currentNode.next != null) {
             if (currentNode.next.value == t) {
                 currentNode.next = currentNode.next.next;
+                size--;
                 return;
             }
             currentNode = currentNode.next;
         }
+        size--;
+    }
+
+    public int getSize() {
+        return size;
     }
 
     @Override
