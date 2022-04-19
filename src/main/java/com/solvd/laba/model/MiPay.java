@@ -9,7 +9,7 @@ public class MiPay implements Payable {
         if(transaction == null){
             throw new TransactionException("The transaction is incorrect.");
         } else {
-            return "The payment was successful through the Mi Pay system. " + transaction.toString();
+            return "The payment was successful through the Mi Pay system. " + transaction;
         }
     }
 }

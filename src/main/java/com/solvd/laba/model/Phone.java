@@ -1,7 +1,7 @@
 package main.java.com.solvd.laba.model;
 
-import main.java.com.solvd.laba.enums.Brand;
 import main.java.com.solvd.laba.enums.Color;
+import main.java.com.solvd.laba.enums.GadgetName;
 import main.java.com.solvd.laba.enums.GadgetType;
 import main.java.com.solvd.laba.interfaces.Camerable;
 
@@ -13,20 +13,20 @@ public class Phone extends Gadget implements Camerable {
     public Phone() {
     }
 
-    public Phone(Brand brand, String model, Battery battery, long phoneNumber) {
-        super(brand, model, battery);
+    public Phone(GadgetName gadgetName, Battery battery, long phoneNumber) {
+        super(GadgetType.PHONE, gadgetName, battery);
         this.phoneNumber = phoneNumber;
     }
 
-    public Phone(Brand brand, String model, Battery battery, long phoneNumber, String operatingSystem, Cpu cpu) {
-        super(brand, model, battery);
+    public Phone(GadgetName gadgetName, Battery battery, long phoneNumber, String operatingSystem, Cpu cpu) {
+        super(GadgetType.PHONE, gadgetName, battery);
         this.phoneNumber = phoneNumber;
         this.operatingSystem = operatingSystem;
         this.cpu = cpu;
     }
 
-    public Phone(GadgetType type, Brand brand, String model, String dimensions, Color color, int weight, Battery battery, long phoneNumber, String operatingSystem, Cpu cpu) {
-        super(type, brand, model, dimensions, color, weight, battery);
+    public Phone(GadgetName gadgetName, String dimensions, Color color, int weight, Battery battery, long phoneNumber, String operatingSystem, Cpu cpu) {
+        super(GadgetType.PHONE, gadgetName, dimensions, color, weight, battery);
         this.phoneNumber = phoneNumber;
         this.operatingSystem = operatingSystem;
         this.cpu = cpu;
@@ -58,15 +58,15 @@ public class Phone extends Gadget implements Camerable {
 
     @Override
     public String makePhoto(){
-        return this.getBrand() + " " + this.getModel() + " can take photos.";
+        return this.getGadgetName().getGadgetBrand() + " " + this.getGadgetName().getGadgetModel() + " can take photos.";
     }
 
     @Override
     public String toString() {
         return "Phone{" +
                 "type='" + this.getType() + '\'' +
-                ", brand='" + this.getBrand() + '\'' +
-                ", model='" + this.getModel() + '\'' +
+                ", brand='" + this.getGadgetName().getGadgetBrand() + '\'' +
+                ", model='" + this.getGadgetName().getGadgetModel() + '\'' +
                 ", dimensions='" + this.getDimensions() + '\'' +
                 ", color='" + this.getColor() + '\'' +
                 ", weight='" + this.getWeight() + '\'' +
@@ -78,22 +78,22 @@ public class Phone extends Gadget implements Camerable {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-        Phone phone = (Phone) obj;
+        Phone phone = (Phone) o;
 
         if (getPhoneNumber() != phone.getPhoneNumber()) return false;
-        if (getBrand() != null ? !getBrand().equals(phone.getBrand()) : phone.getBrand() != null) return false;
-        return getModel() != null ? getModel().equals(phone.getModel()) : phone.getModel() == null;
+        if (!getOperatingSystem().equals(phone.getOperatingSystem())) return false;
+        return getCpu().equals(phone.getCpu());
     }
 
     @Override
     public int hashCode() {
-        int result = (int) getPhoneNumber();
-        result = 31 * result + (getModel() != null ? getModel().hashCode() : 0);
-        result = 31 * result + (getBrand() != null ? getBrand().hashCode() : 0);
+        int result = (int) (getPhoneNumber() ^ (getPhoneNumber() >>> 32));
+        result = 31 * result + getOperatingSystem().hashCode();
+        result = 31 * result + getCpu().hashCode();
         return result;
     }
 }

@@ -1,7 +1,7 @@
 package main.java.com.solvd.laba.model;
 
-import main.java.com.solvd.laba.enums.Brand;
 import main.java.com.solvd.laba.enums.Color;
+import main.java.com.solvd.laba.enums.GadgetName;
 import main.java.com.solvd.laba.enums.GadgetType;
 import main.java.com.solvd.laba.interfaces.Camerable;
 
@@ -13,21 +13,21 @@ public class Tablet extends Gadget implements Camerable {
     public Tablet() {
     }
 
-    public Tablet(Brand brand, String model, Battery battery, String operatingSystem, Cpu cpu, float displaySize) {
-        super(brand, model, battery);
+    public Tablet(GadgetName gadgetName, Battery battery, String operatingSystem, Cpu cpu, float displaySize) {
+        super(GadgetType.TABLET, gadgetName, battery);
         this.operatingSystem = operatingSystem;
         this.cpu = cpu;
         this.displaySize = displaySize;
     }
 
-    public Tablet(GadgetType type, Brand brand, String model, String dimensions, Color color, int weight, Battery battery, String operatingSystem, Cpu cpu, float displaySize) {
-        super(type, brand, model, dimensions, color, weight, battery);
+    public Tablet(GadgetName gadgetName, String dimensions, Color color, int weight, Battery battery, String operatingSystem, Cpu cpu, float displaySize) {
+        super(GadgetType.TABLET, gadgetName, dimensions, color, weight, battery);
         this.operatingSystem = operatingSystem;
         this.cpu = cpu;
         this.displaySize = displaySize;
     }
 
-   public void setOperatingSystem(String operatingSystem) {
+    public void setOperatingSystem(String operatingSystem) {
         this.operatingSystem = operatingSystem;
     }
 
@@ -52,16 +52,16 @@ public class Tablet extends Gadget implements Camerable {
     }
 
     @Override
-    public String makePhoto(){
-        return this.getBrand() + " " + this.getModel() + " can take photos.";
+    public String makePhoto() {
+        return this.getGadgetName().getGadgetBrand() + " " + this.getGadgetName().getGadgetModel() + " can take photos.";
     }
 
     @Override
     public String toString() {
         return "Tablet{" +
                 "type='" + this.getType() + '\'' +
-                ", brand='" + this.getBrand() + '\'' +
-                ", model='" + this.getModel() + '\'' +
+                ", brand='" + this.getGadgetName().getGadgetBrand() + '\'' +
+                ", model='" + this.getGadgetName().getGadgetModel() + '\'' +
                 ", dimensions='" + this.getDimensions() + '\'' +
                 ", color='" + this.getColor() + '\'' +
                 ", weight='" + this.getWeight() + '\'' +
@@ -73,24 +73,22 @@ public class Tablet extends Gadget implements Camerable {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-        Tablet tablet = (Tablet) obj;
+        Tablet tablet = (Tablet) o;
 
-        if (getDisplaySize() != tablet.getDisplaySize()) return false;
-        if (getBrand() != null ? !getBrand().equals(tablet.getBrand()) : tablet.getBrand() != null) return false;
-        if (getModel() != null ? !getModel().equals(tablet.getModel()) : tablet.getModel() != null) return false;
-        return getOperatingSystem() != null ? getOperatingSystem().equals(tablet.getOperatingSystem()) : tablet.getOperatingSystem() == null;
+        if (Float.compare(tablet.getDisplaySize(), getDisplaySize()) != 0) return false;
+        if (!getOperatingSystem().equals(tablet.getOperatingSystem())) return false;
+        return getCpu().equals(tablet.getCpu());
     }
 
     @Override
     public int hashCode() {
-        int result = (int)getDisplaySize();
-        result = 31 * result + ((getModel() == null) ? 0 : getModel().hashCode());
-        result = 31 * result + ((operatingSystem == null) ? 0 : operatingSystem.hashCode());
-        result = 31 * result + ((getBrand() == null) ? 0 : getBrand().hashCode());
+        int result = getOperatingSystem().hashCode();
+        result = 31 * result + getCpu().hashCode();
+        result = 31 * result + (getDisplaySize() != 0.0f ? Float.floatToIntBits(getDisplaySize()) : 0);
         return result;
     }
 }

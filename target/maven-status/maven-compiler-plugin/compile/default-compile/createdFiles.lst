@@ -1,4 +1,3 @@
-main\java\com\solvd\laba\enums\Brand.class
 main\java\com\solvd\laba\model\Gadget$1.class
 main\java\com\solvd\laba\interfaces\functional\ICompare.class
 main\java\com\solvd\laba\interfaces\functional\IFormat.class
@@ -17,6 +16,7 @@ main\java\com\solvd\laba\model\Transaction.class
 main\java\com\solvd\laba\interfaces\functional\ICharge.class
 main\java\com\solvd\laba\interfaces\functional\IConvert.class
 main\java\com\solvd\laba\model\SamsungPay.class
+main\java\com\solvd\laba\enums\GadgetModel.class
 main\java\com\solvd\laba\interfaces\Payable.class
 main\java\com\solvd\laba\interfaces\Camerable.class
 main\java\com\solvd\laba\enums\Color.class
@@ -27,8 +27,10 @@ main\java\com\solvd\laba\enums\GadgetType.class
 main\java\com\solvd\laba\model\Cpu.class
 main\java\com\solvd\laba\exceptions\TransactionException.class
 main\java\com\solvd\laba\interfaces\Chargerable.class
+main\java\com\solvd\laba\enums\GadgetBrand.class
 main\java\com\solvd\laba\interfaces\Callable.class
 main\java\com\solvd\laba\interfaces\functional\ICall.class
 main\java\com\solvd\laba\model\Battery.class
 main\java\com\solvd\laba\model\ApplePay.class
+main\java\com\solvd\laba\enums\GadgetName.class
 main\java\com\solvd\laba\Runner.class

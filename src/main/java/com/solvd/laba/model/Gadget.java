@@ -1,7 +1,7 @@
 package main.java.com.solvd.laba.model;
 
-import main.java.com.solvd.laba.enums.Brand;
 import main.java.com.solvd.laba.enums.Color;
+import main.java.com.solvd.laba.enums.GadgetName;
 import main.java.com.solvd.laba.enums.GadgetType;
 import main.java.com.solvd.laba.exceptions.ChargingException;
 import main.java.com.solvd.laba.exceptions.TransactionException;
@@ -19,8 +19,7 @@ public abstract class Gadget implements Messengable, Chargerable, Callable {
     private static final Logger LOGGER = LogManager.getLogger(Gadget.class);
 
     private GadgetType type;
-    private Brand brand;
-    private String model;
+    private GadgetName gadgetName;
     private String dimensions;
     private Color color;
     private int weight;
@@ -33,11 +32,11 @@ public abstract class Gadget implements Messengable, Chargerable, Callable {
 
     }
 
-    public Gadget(Brand brand, String model, Battery battery) {
-        this.brand = brand;
-        this.model = model;
+    public Gadget(GadgetType type, GadgetName gadgetName, Battery battery) {
+        this.type = type;
+        this.gadgetName = gadgetName;
         this.battery = battery;
-        switch (brand){
+        switch (gadgetName.getGadgetBrand()){
             case APPLE: this.payment = new ApplePay(); break;
             case SAMSUNG: this.payment = new SamsungPay(); break;
             case XIAOMI: this.payment = new MiPay(); break;
@@ -45,15 +44,14 @@ public abstract class Gadget implements Messengable, Chargerable, Callable {
         }
     }
 
-    public Gadget(GadgetType type, Brand brand, String model, String dimensions, Color color, int weight, Battery battery) {
+    public Gadget(GadgetType type, GadgetName gadgetName, String dimensions, Color color, int weight, Battery battery) {
         this.type = type;
-        this.brand = brand;
-        this.model = model;
+        this.gadgetName = gadgetName;
         this.dimensions = dimensions;
         this.color = color;
         this.weight = weight;
         this.battery = battery;
-        switch (brand){
+        switch (gadgetName.getGadgetBrand()){
             case APPLE: this.payment = new ApplePay(); break;
             case SAMSUNG: this.payment = new SamsungPay(); break;
             case XIAOMI: this.payment = new MiPay(); break;
@@ -101,20 +99,12 @@ public abstract class Gadget implements Messengable, Chargerable, Callable {
         return battery;
     }
 
-    public Brand getBrand() {
-        return brand;
+    public GadgetName getGadgetName() {
+        return gadgetName;
     }
 
-    public void setBrand(Brand brand) {
-        this.brand = brand;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
+    public void setGadgetName(GadgetName gadgetName) {
+        this.gadgetName = gadgetName;
     }
 
     public Payable getPayment() {
@@ -142,7 +132,9 @@ public abstract class Gadget implements Messengable, Chargerable, Callable {
             DecimalFormat decimalFormat = new DecimalFormat("#.##");
             float chargingTime = COEFFICIENT * this.battery.getCapacity() / chargingCurrent;
             String result = decimalFormat.format(chargingTime);
-            LOGGER.info("Using this charging current " + chargingCurrent + " (mA), the battery charging time of " + this.getBrand() + " " + this.getModel() + " will be " + result + " h.");
+            LOGGER.info("Using this charging current " + chargingCurrent + " (mA), the battery charging time of "
+                    + this.gadgetName.getGadgetBrand() + " " + this.gadgetName.getGadgetModel()
+                    + " will be " + result + " h.");
         }
     }
 

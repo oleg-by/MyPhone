@@ -1,6 +1,6 @@
 package main.java.com.solvd.laba.enums;
 
-public enum Brand {
+public enum GadgetBrand {
     APPLE("Apple"),
     SAMSUNG("Samsung"),
     XIAOMI("Xiaomi"),
@@ -11,7 +11,7 @@ public enum Brand {
 
     private final String name;
 
-    Brand(String name) {
+    GadgetBrand(String name) {
         this.name = name;
     }
 

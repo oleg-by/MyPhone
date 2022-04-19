@@ -1,8 +1,7 @@
 package main.java.com.solvd.laba;
 
-import main.java.com.solvd.laba.enums.Brand;
 import main.java.com.solvd.laba.enums.Color;
-import main.java.com.solvd.laba.enums.GadgetType;
+import main.java.com.solvd.laba.enums.GadgetName;
 import main.java.com.solvd.laba.exceptions.AmountTransactionException;
 import main.java.com.solvd.laba.exceptions.BatteryException;
 import main.java.com.solvd.laba.exceptions.CallerIDException;
@@ -68,14 +67,14 @@ public class Runner {
         batteryList.add(new Battery(4000, "Li-ion"));
 
         //Using enums fields
-        Phone iphone = new Phone(GadgetType.PHONE, Brand.APPLE, "Iphone 13 PRO MAX", "160.8 x 78.1 x 7.7", Color.WHITE, 240, batteryList.get(0), 291112233, "iOS", cpuList.get(0));
-        Phone samsung = new Phone(GadgetType.PHONE, Brand.SAMSUNG, "Galaxy S22 Ultra", "163.3 x 77.9 x 8.9", Color.BLUE, 229, batteryList.get(1), 447775566, "Android", cpuList.get(1));
-        Tablet ipad = new Tablet(GadgetType.TABLET, Brand.APPLE, "iPad Pro", "280.6 x 214.9 x 6.4", Color.SILVER, 684, batteryList.get(2), "iPadOS 15", cpuList.get(2), (float) 12.9);
-        SmartWatch watch = new SmartWatch(GadgetType.WATCH, Brand.APPLE, "Watch Series 7", "45 x 38 x 10.7", Color.GREY, 39, batteryList.get(3), (float) 1.9);
-        Phone xiaomi = new Phone(GadgetType.PHONE, Brand.XIAOMI, "Xiaomi Mi 11 Ultra", "164.3 x 74.6 x 8.38", Color.WHITE, 234, batteryList.get(1), 296666222, "Android", cpuList.get(3));
-        Phone huawei = new Phone(GadgetType.PHONE, Brand.HUAWEI, "Huawei P50 Pro", "158.8 x 72.8 x 8.5", Color.GREEN, 195, batteryList.get(4), 335059905, "Android", cpuList.get(3));
-        Phone sony = new Phone(GadgetType.PHONE, Brand.SONY, "Sony Xperia Pro-I", "166 x 72 x 8.9", Color.SILVER, 211, batteryList.get(5), 296060103, "Android", cpuList.get(3));
-        Phone honor = new Phone(GadgetType.PHONE, Brand.HONOR, "HONOR 30 Pro+", "160.3 x 73.6 x 8.38", Color.BLACK, 190, batteryList.get(6), 332020327, "Android", cpuList.get(4));
+        Phone iphone = new Phone(GadgetName.IPHONE, "160.8 x 78.1 x 7.7", Color.WHITE, 240, batteryList.get(0), 291112233, "iOS", cpuList.get(0));
+        Phone samsung = new Phone(GadgetName.SAMS, "163.3 x 77.9 x 8.9", Color.BLUE, 229, batteryList.get(1), 447775566, "Android", cpuList.get(1));
+        Tablet ipad = new Tablet(GadgetName.IPAD, "280.6 x 214.9 x 6.4", Color.SILVER, 684, batteryList.get(2), "iPadOS 15", cpuList.get(2), (float) 12.9);
+        SmartWatch watch = new SmartWatch(GadgetName.IWATCH, "45 x 38 x 10.7", Color.GREY, 39, batteryList.get(3), (float) 1.9);
+        Phone xiaomi = new Phone(GadgetName.MI11, "164.3 x 74.6 x 8.38", Color.WHITE, 234, batteryList.get(1), 296666222, "Android", cpuList.get(3));
+        Phone huawei = new Phone(GadgetName.HUA, "158.8 x 72.8 x 8.5", Color.GREEN, 195, batteryList.get(4), 335059905, "Android", cpuList.get(3));
+        Phone sony = new Phone(GadgetName.SONYXP, "166 x 72 x 8.9", Color.SILVER, 211, batteryList.get(5), 296060103, "Android", cpuList.get(3));
+        Phone honor = new Phone(GadgetName.HONOR30, "160.3 x 73.6 x 8.38", Color.BLACK, 190, batteryList.get(6), 332020327, "Android", cpuList.get(4));
 
         List<Gadget> myGadgets = new ArrayList<>();
         myGadgets.add(iphone);
@@ -140,7 +139,7 @@ public class Runner {
         LOGGER.info("The size of my custom Linked List: " + myLinkedList.getSize());
         myLinkedList.remove(myGadgets.get(2));
         LOGGER.info("The size of my custom Linked List after deleting one element: " + myLinkedList.getSize());
-        Phone xiaomiTest = new Phone(GadgetType.PHONE, Brand.XIAOMI, "Xiaomi Mi 11 Ultra", "164.3 x 74.6 x 8.38", Color.BLUE, 234, new Battery(5000, "Li-ion"), 293323666, "Android", new Cpu("Qualcomm Snapdragon 888", 2840));
+        Phone xiaomiTest = new Phone(GadgetName.MI11, "164.3 x 74.6 x 8.38", Color.BLUE, 234, new Battery(5000, "Li-ion"), 293323666, "Android", new Cpu("Qualcomm Snapdragon 888", 2840));
         myLinkedList.addFirst(xiaomiTest);
         LOGGER.info(myLinkedList);
         LOGGER.info("The size of my custom Linked List after adding one element: " + myLinkedList.getSize());
@@ -187,10 +186,10 @@ public class Runner {
                 yPointer++;
             }
             if (xPointer > yPointer) {
-                return x.getModel() + " is better than " + y.getModel();
+                return x.getGadgetName() + " is better than " + y.getGadgetName();
             } else if (xPointer == yPointer) {
                 return "The characteristics of the models are similar.";
-            } else return y.getModel() + " is better than " + x.getModel();
+            } else return y.getGadgetName() + " is better than " + x.getGadgetName();
         };
         LOGGER.info(test.compareGadgets((Phone) myGadgets.get(0), (Phone) myGadgets.get(1)));
 
@@ -240,7 +239,7 @@ public class Runner {
         // Create List of objects "Apple".
         LOGGER.info("#2");
         List<Gadget> appleList = myGadgets.stream()
-                .filter(gadget -> gadget.getBrand().getName().equals("Apple")).collect(Collectors.toList());
+                .filter(gadget -> gadget.getGadgetName().getGadgetBrand().getName().equals("Apple")).collect(Collectors.toList());
         for (Gadget g : appleList) {
             LOGGER.info(g);
         }

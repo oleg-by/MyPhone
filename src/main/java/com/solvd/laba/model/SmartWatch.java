@@ -1,7 +1,7 @@
 package main.java.com.solvd.laba.model;
 
-import main.java.com.solvd.laba.enums.Brand;
 import main.java.com.solvd.laba.enums.Color;
+import main.java.com.solvd.laba.enums.GadgetName;
 import main.java.com.solvd.laba.enums.GadgetType;
 
 public class SmartWatch extends Gadget {
@@ -10,13 +10,13 @@ public class SmartWatch extends Gadget {
     public SmartWatch() {
     }
 
-    public SmartWatch(Brand brand, String model, Battery battery, float displaySize) {
-        super(brand, model, battery);
+    public SmartWatch(GadgetName gadgetName, Battery battery, float displaySize) {
+        super(GadgetType.WATCH, gadgetName, battery);
         this.displaySize = displaySize;
     }
 
-    public SmartWatch(GadgetType type, Brand brand, String model, String dimensions, Color color, int weight, Battery battery, float displaySize) {
-        super(type, brand, model, dimensions, color, weight, battery);
+    public SmartWatch(GadgetName gadgetName, String dimensions, Color color, int weight, Battery battery, float displaySize) {
+        super(GadgetType.WATCH, gadgetName, dimensions, color, weight, battery);
         this.displaySize = displaySize;
     }
 
@@ -32,8 +32,8 @@ public class SmartWatch extends Gadget {
     public String toString() {
         return "SmartWatch{" +
                 "type='" + this.getType() + '\'' +
-                ", brand='" + this.getBrand() + '\'' +
-                ", model='" + this.getModel() + '\'' +
+                ", brand='" + this.getGadgetName().getGadgetBrand() + '\'' +
+                ", model='" + this.getGadgetName().getGadgetModel() + '\'' +
                 ", dimensions='" + this.getDimensions() + '\'' +
                 ", color='" + this.getColor() + '\'' +
                 ", weight='" + this.getWeight() + '\'' +
@@ -43,22 +43,17 @@ public class SmartWatch extends Gadget {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-        SmartWatch watch = (SmartWatch) obj;
+        SmartWatch that = (SmartWatch) o;
 
-        if (getDisplaySize() != watch.getDisplaySize()) return false;
-        if (getBrand() != null ? !getBrand().equals(watch.getBrand()) : watch.getBrand() != null) return false;
-        return getModel() != null ? getModel().equals(watch.getModel()) : watch.getModel() == null;
+        return Float.compare(that.getDisplaySize(), getDisplaySize()) == 0;
     }
 
     @Override
     public int hashCode() {
-        int result = (int) getDisplaySize();
-        result = 31 * result + (getModel() != null ? getModel().hashCode() : 0);
-        result = 31 * result + (getBrand() != null ? getBrand().hashCode() : 0);
-        return result;
+        return (getDisplaySize() != 0.0f ? Float.floatToIntBits(getDisplaySize()) : 0);
     }
 }
