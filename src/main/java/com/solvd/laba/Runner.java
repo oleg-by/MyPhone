@@ -2,6 +2,7 @@ package main.java.com.solvd.laba;
 
 import main.java.com.solvd.laba.enums.Color;
 import main.java.com.solvd.laba.enums.GadgetName;
+import main.java.com.solvd.laba.enums.GadgetType;
 import main.java.com.solvd.laba.exceptions.AmountTransactionException;
 import main.java.com.solvd.laba.exceptions.BatteryException;
 import main.java.com.solvd.laba.exceptions.CallerIDException;
@@ -17,6 +18,7 @@ import org.apache.logging.log4j.Logger;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.*;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -25,7 +27,7 @@ public class Runner {
 
     private static final Logger LOGGER = LogManager.getLogger(Runner.class);
 
-    public static void main(String[] args) throws ChargingException, AmountTransactionException, BatteryException, CallerIDException {
+    public static void main(String[] args) {
 
         // Create the objects and add them to a custom Linked List
         List<Gadget> gadgets = createObjects();
@@ -34,7 +36,11 @@ public class Runner {
         checkPayment(gadgets);
 
         // Check the gadget charging of objects (gadgets)
-        checkCharging(gadgets);
+        try {
+            checkCharging(gadgets);
+        } catch (ChargingException e) {
+            LOGGER.error(e.getMessage());
+        }
 
         // Check the using custom LinkedList
         checkMyLinkedList(gadgets);
@@ -47,9 +53,12 @@ public class Runner {
 
         // Check the using Stream
         checkMyStreams(gadgets);
+
+        // Check the Reflection with Class Caller
+        checkMyReflection();
     }
 
-    public static List<Gadget> createObjects() throws BatteryException {
+    public static List<Gadget> createObjects() {
         List<Cpu> cpuList = new ArrayList<>();
         cpuList.add(new Cpu("Apple A15 Bionic", 3240));
         cpuList.add(new Cpu("Qualcomm Snapdragon 8 Gen1", 3000));
@@ -58,18 +67,22 @@ public class Runner {
         cpuList.add(new Cpu("HiSilicon Kirin 990 5G", 2860));
 
         List<Battery> batteryList = new ArrayList<>();
-        batteryList.add(new Battery(4325, "Li-ion"));
-        batteryList.add(new Battery(5000, "Li-ion"));
-        batteryList.add(new Battery(9720, "Li-ion"));
-        batteryList.add(new Battery(1094, "Li-ion"));
-        batteryList.add(new Battery(4360, "Li-ion"));
-        batteryList.add(new Battery(4500, "Li-ion"));
-        batteryList.add(new Battery(4000, "Li-ion"));
+        try {
+            batteryList.add(new Battery(4325, "Li-ion"));
+            batteryList.add(new Battery(5000, "Li-ion"));
+            batteryList.add(new Battery(9720, "Li-ion"));
+            batteryList.add(new Battery(1094, "Li-ion"));
+            batteryList.add(new Battery(4360, "Li-ion"));
+            batteryList.add(new Battery(4500, "Li-ion"));
+            batteryList.add(new Battery(4000, "Li-ion"));
+        } catch (BatteryException e) {
+            LOGGER.error(e.getMessage());
+        }
 
         //Using enums fields
         Phone iphone = new Phone(GadgetName.IPHONE, "160.8 x 78.1 x 7.7", Color.WHITE, 240, batteryList.get(0), 291112233, "iOS", cpuList.get(0));
         Phone samsung = new Phone(GadgetName.SAMS, "163.3 x 77.9 x 8.9", Color.BLUE, 229, batteryList.get(1), 447775566, "Android", cpuList.get(1));
-        Tablet ipad = new Tablet(GadgetName.IPAD, "280.6 x 214.9 x 6.4", Color.SILVER, 684, batteryList.get(2), "iPadOS 15", cpuList.get(2), (float) 12.9);
+        Tablet ipad = new Tablet(GadgetName.IPAD, "280.6 x 214.9 x 6.4", Color.WHITE, 684, batteryList.get(2), "iPadOS 15", cpuList.get(2), (float) 12.9);
         SmartWatch watch = new SmartWatch(GadgetName.IWATCH, "45 x 38 x 10.7", Color.GREY, 39, batteryList.get(3), (float) 1.9);
         Phone xiaomi = new Phone(GadgetName.MI11, "164.3 x 74.6 x 8.38", Color.WHITE, 234, batteryList.get(1), 296666222, "Android", cpuList.get(3));
         Phone huawei = new Phone(GadgetName.HUA, "158.8 x 72.8 x 8.5", Color.GREEN, 195, batteryList.get(4), 335059905, "Android", cpuList.get(3));
@@ -130,7 +143,7 @@ public class Runner {
         }
     }
 
-    public static void checkMyLinkedList(List<Gadget> myGadgets) throws BatteryException {
+    public static void checkMyLinkedList(List<Gadget> myGadgets) {
         LinkedList<Gadget> myLinkedList = new LinkedList<>();
         for (Gadget g : myGadgets) {
             myLinkedList.addLast(g);
@@ -139,15 +152,27 @@ public class Runner {
         LOGGER.info("The size of my custom Linked List: " + myLinkedList.getSize());
         myLinkedList.remove(myGadgets.get(2));
         LOGGER.info("The size of my custom Linked List after deleting one element: " + myLinkedList.getSize());
-        Phone xiaomiTest = new Phone(GadgetName.MI11, "164.3 x 74.6 x 8.38", Color.BLUE, 234, new Battery(5000, "Li-ion"), 293323666, "Android", new Cpu("Qualcomm Snapdragon 888", 2840));
+        Battery bat = null;
+        try {
+            bat = new Battery(5000, "Li-ion");
+        } catch (BatteryException e) {
+            LOGGER.error(e.getMessage());
+        }
+        Phone xiaomiTest = new Phone(GadgetName.MI11, "164.3 x 74.6 x 8.38", Color.BLUE, 234, bat, 293323666, "Android", new Cpu("Qualcomm Snapdragon 888", 2840));
         myLinkedList.addFirst(xiaomiTest);
         LOGGER.info(myLinkedList);
         LOGGER.info("The size of my custom Linked List after adding one element: " + myLinkedList.getSize());
     }
 
-    public static void checkFunctionalInterface(List<Gadget> myGadgets) throws CallerIDException {
-        Caller alex = new Caller("Alex", 291112233);
-        Caller mary = new Caller("Mary", 447775566);
+    public static void checkFunctionalInterface(List<Gadget> myGadgets) {
+        Caller alex = null;
+        Caller mary = null;
+        try {
+            alex = new Caller("Alex", 291112233);
+            mary = new Caller("Mary", 447775566);
+        } catch (CallerIDException e) {
+            LOGGER.error(e.getMessage());
+        }
 
         ICall<Caller, String> call = x -> "I'm calling " + x.getName() + "'s phone number " + x.getCallerID() + ".";
         LOGGER.info(call.callPhoneNumber(alex));
@@ -164,8 +189,10 @@ public class Runner {
         }
 
         IFormat f = x -> "+375" + x;
-        LOGGER.info(f.formatNumber(alex.getCallerID()));
-        LOGGER.info(f.formatNumber(mary.getCallerID()));
+        if (alex != null && mary != null) {
+            LOGGER.info(f.formatNumber(alex.getCallerID()));
+            LOGGER.info(f.formatNumber(mary.getCallerID()));
+        }
 
         ICompare<Phone, Phone> test = (x, y) -> {
             int xPointer = 0;
@@ -202,7 +229,8 @@ public class Runner {
         File file = new File(path);
         String text = null;
         try {
-            text = StringUtils.lowerCase(FileUtils.readFileToString(file, "UTF-8")).replaceAll("[^\\da-zA-Zа-яёА-ЯЁ ]", "");
+            text = StringUtils.lowerCase(FileUtils.readFileToString(file, "UTF-8"))
+                    .replaceAll("[^\\da-zA-Zа-яёА-ЯЁ ]", "");
         } catch (IOException e) {
             LOGGER.error(e.getMessage());
         }
@@ -229,19 +257,65 @@ public class Runner {
     }
 
     public static void checkMyStreams(List<Gadget> myGadgets) {
-        // Show objects that have a battery size greater than 5000, and sorted by them weight.
-        LOGGER.info("#1");
+        // Show objects that have a battery capacity greater than 5000, and sorted by them weight.
+        LOGGER.info("#1 task");
         myGadgets.stream()
                 .filter(gadget -> gadget.getBattery().getCapacity() >= 5000)
                 .sorted(Comparator.comparing(Gadget::getWeight))
                 .forEach(LOGGER::info);
 
         // Create List of objects "Apple".
-        LOGGER.info("#2");
+        LOGGER.info("#2 task");
         List<Gadget> appleList = myGadgets.stream()
-                .filter(gadget -> gadget.getGadgetName().getGadgetBrand().getName().equals("Apple")).collect(Collectors.toList());
+                .filter(gadget -> gadget.getGadgetName().getGadgetBrand().getName().equals("Apple"))
+                .collect(Collectors.toList());
         for (Gadget g : appleList) {
             LOGGER.info(g);
+        }
+
+        // Count the number of white phones.
+        LOGGER.info("#3 task");
+        long count = myGadgets.stream().filter(gadget -> gadget.getColor().equals(Color.WHITE)
+                && gadget.getType().equals(GadgetType.PHONE))
+                .count();
+        LOGGER.info("The number of white phones: " + count);
+    }
+
+    public static void checkMyReflection() {
+        LOGGER.info("Print info about Class: " + Caller.class.getName() + ".");
+        Constructor[] constructors = Caller.class.getDeclaredConstructors();
+        Caller caller = null;
+        try {
+            caller = (Caller) constructors[0].newInstance();
+        } catch (InstantiationException e) {
+            LOGGER.error(e.getMessage());
+        } catch (IllegalAccessException e) {
+            LOGGER.error(e.getMessage());
+        } catch (InvocationTargetException e) {
+            LOGGER.error(e.getMessage());
+        }
+
+        Field[] fields = new Field[0];
+        if (caller != null) {
+            fields = caller.getClass().getDeclaredFields();
+        }
+        int i = 1;
+        for (Field field : fields) {
+            LOGGER.info("Field " + i + ": " + field.getName());
+            i++;
+        }
+        Method[] methods = new Method[0];
+        if (caller != null) {
+            methods = caller.getClass().getDeclaredMethods();
+        }
+        i = 1;
+        for (Method method : methods) {
+            LOGGER.info("Method " + i + ": " + method.getName());
+            i++;
+            Parameter[] parameters = method.getParameters();
+            for (Parameter parameter : parameters) {
+                LOGGER.info("Its parameters: " + parameter.getName() + "; type: " + parameter.getType().getName());
+            }
         }
     }
 }

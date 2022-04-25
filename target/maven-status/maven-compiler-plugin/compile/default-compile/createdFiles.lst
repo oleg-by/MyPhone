@@ -10,6 +10,7 @@ main\java\com\solvd\laba\model\Tablet.class
 main\java\com\solvd\laba\model\Gadget.class
 main\java\com\solvd\laba\model\SmartWatch.class
 main\java\com\solvd\laba\exceptions\ChargingException.class
+main\java\com\solvd\laba\deadlock\TestB.class
 main\java\com\solvd\laba\linkedlist\LinkedList.class
 main\java\com\solvd\laba\model\Caller.class
 main\java\com\solvd\laba\model\Transaction.class
@@ -19,6 +20,7 @@ main\java\com\solvd\laba\model\SamsungPay.class
 main\java\com\solvd\laba\enums\GadgetModel.class
 main\java\com\solvd\laba\interfaces\Payable.class
 main\java\com\solvd\laba\interfaces\Camerable.class
+main\java\com\solvd\laba\deadlock\Deadlock.class
 main\java\com\solvd\laba\enums\Color.class
 main\java\com\solvd\laba\exceptions\BatteryException.class
 main\java\com\solvd\laba\model\DefaultPay.class
@@ -31,6 +33,7 @@ main\java\com\solvd\laba\enums\GadgetBrand.class
 main\java\com\solvd\laba\interfaces\Callable.class
 main\java\com\solvd\laba\interfaces\functional\ICall.class
 main\java\com\solvd\laba\model\Battery.class
+main\java\com\solvd\laba\deadlock\TestA.class
 main\java\com\solvd\laba\model\ApplePay.class
 main\java\com\solvd\laba\enums\GadgetName.class
 main\java\com\solvd\laba\Runner.class

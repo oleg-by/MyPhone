@@ -1,3 +1,4 @@
+D:\dev\MyPhone\src\main\java\com\solvd\laba\deadlock\TestA.java
 D:\dev\MyPhone\src\main\java\com\solvd\laba\interfaces\Payable.java
 D:\dev\MyPhone\src\main\java\com\solvd\laba\interfaces\functional\ICall.java
 D:\dev\MyPhone\src\main\java\com\solvd\laba\interfaces\Messengable.java
@@ -23,6 +24,7 @@ D:\dev\MyPhone\src\main\java\com\solvd\laba\enums\GadgetBrand.java
 D:\dev\MyPhone\src\main\java\com\solvd\laba\model\Transaction.java
 D:\dev\MyPhone\src\main\java\com\solvd\laba\enums\Color.java
 D:\dev\MyPhone\src\main\java\com\solvd\laba\Runner.java
+D:\dev\MyPhone\src\main\java\com\solvd\laba\deadlock\Deadlock.java
 D:\dev\MyPhone\src\main\java\com\solvd\laba\enums\GadgetName.java
 D:\dev\MyPhone\src\main\java\com\solvd\laba\linkedlist\LinkedList.java
 D:\dev\MyPhone\src\main\java\com\solvd\laba\model\Phone.java
@@ -31,4 +33,5 @@ D:\dev\MyPhone\src\main\java\com\solvd\laba\exceptions\ChargingException.java
 D:\dev\MyPhone\src\main\java\com\solvd\laba\exceptions\BatteryException.java
 D:\dev\MyPhone\src\main\java\com\solvd\laba\enums\GadgetModel.java
 D:\dev\MyPhone\src\main\java\com\solvd\laba\model\Caller.java
+D:\dev\MyPhone\src\main\java\com\solvd\laba\deadlock\TestB.java
 D:\dev\MyPhone\src\main\java\com\solvd\laba\interfaces\functional\IFormat.java
