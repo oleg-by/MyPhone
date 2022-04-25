@@ -1,4 +1,4 @@
-package main.java.com.solvd.laba.exceptions;
+package com.solvd.laba.exceptions;
 
 public class AmountTransactionException extends Exception {
     public AmountTransactionException() {

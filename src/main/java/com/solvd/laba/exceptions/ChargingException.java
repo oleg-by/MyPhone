@@ -1,4 +1,4 @@
-package main.java.com.solvd.laba.exceptions;
+package com.solvd.laba.exceptions;
 
 public class ChargingException extends Exception {
     public ChargingException() {

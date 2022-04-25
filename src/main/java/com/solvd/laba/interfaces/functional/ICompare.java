@@ -1,7 +1,6 @@
-package main.java.com.solvd.laba.interfaces.functional;
+package com.solvd.laba.interfaces.functional;
 
-import main.java.com.solvd.laba.model.Gadget;
-import main.java.com.solvd.laba.model.Phone;
+import com.solvd.laba.model.Gadget;
 
 @FunctionalInterface
 public interface ICompare<T extends Gadget, K extends Gadget> {

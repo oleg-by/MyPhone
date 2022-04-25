@@ -1,4 +1,4 @@
-package main.java.com.solvd.laba.linkedlist;
+package com.solvd.laba.linkedlist;
 
 public class LinkedList<T> {
 

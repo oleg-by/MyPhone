@@ -1,15 +1,15 @@
-package main.java.com.solvd.laba;
+package com.solvd.laba;
 
-import main.java.com.solvd.laba.enums.Color;
-import main.java.com.solvd.laba.enums.GadgetName;
-import main.java.com.solvd.laba.enums.GadgetType;
-import main.java.com.solvd.laba.exceptions.AmountTransactionException;
-import main.java.com.solvd.laba.exceptions.BatteryException;
-import main.java.com.solvd.laba.exceptions.CallerIDException;
-import main.java.com.solvd.laba.exceptions.ChargingException;
-import main.java.com.solvd.laba.interfaces.functional.*;
-import main.java.com.solvd.laba.linkedlist.LinkedList;
-import main.java.com.solvd.laba.model.*;
+import com.solvd.laba.enums.Color;
+import com.solvd.laba.enums.GadgetName;
+import com.solvd.laba.enums.GadgetType;
+import com.solvd.laba.exceptions.AmountTransactionException;
+import com.solvd.laba.exceptions.BatteryException;
+import com.solvd.laba.exceptions.CallerIDException;
+import com.solvd.laba.exceptions.ChargingException;
+import com.solvd.laba.interfaces.functional.*;
+import com.solvd.laba.linkedlist.LinkedList;
+import com.solvd.laba.model.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;

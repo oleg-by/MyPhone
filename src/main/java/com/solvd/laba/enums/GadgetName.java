@@ -1,4 +1,4 @@
-package main.java.com.solvd.laba.enums;
+package com.solvd.laba.enums;
 
 public enum GadgetName {
     IPHONE(GadgetBrand.APPLE, GadgetModel.I13PROMAX),

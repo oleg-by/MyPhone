@@ -1,4 +1,4 @@
-package main.java.com.solvd.laba.deadlock;
+package com.solvd.laba.deadlock;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

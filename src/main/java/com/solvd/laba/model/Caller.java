@@ -1,6 +1,6 @@
-package main.java.com.solvd.laba.model;
+package com.solvd.laba.model;
 
-import main.java.com.solvd.laba.exceptions.CallerIDException;
+import com.solvd.laba.exceptions.CallerIDException;
 
 public class Caller {
     private String name;

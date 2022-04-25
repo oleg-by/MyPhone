@@ -1,6 +1,6 @@
-package main.java.com.solvd.laba.interfaces;
+package com.solvd.laba.interfaces;
 
-import main.java.com.solvd.laba.model.Caller;
+import com.solvd.laba.model.Caller;
 
 public interface Callable {
     default String calling(Caller caller) {

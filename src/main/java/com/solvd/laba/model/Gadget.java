@@ -1,14 +1,14 @@
-package main.java.com.solvd.laba.model;
+package com.solvd.laba.model;
 
-import main.java.com.solvd.laba.enums.Color;
-import main.java.com.solvd.laba.enums.GadgetName;
-import main.java.com.solvd.laba.enums.GadgetType;
-import main.java.com.solvd.laba.exceptions.ChargingException;
-import main.java.com.solvd.laba.exceptions.TransactionException;
-import main.java.com.solvd.laba.interfaces.Callable;
-import main.java.com.solvd.laba.interfaces.Chargerable;
-import main.java.com.solvd.laba.interfaces.Messengable;
-import main.java.com.solvd.laba.interfaces.Payable;
+import com.solvd.laba.enums.Color;
+import com.solvd.laba.enums.GadgetName;
+import com.solvd.laba.enums.GadgetType;
+import com.solvd.laba.exceptions.ChargingException;
+import com.solvd.laba.exceptions.TransactionException;
+import com.solvd.laba.interfaces.Callable;
+import com.solvd.laba.interfaces.Chargerable;
+import com.solvd.laba.interfaces.Messengable;
+import com.solvd.laba.interfaces.Payable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

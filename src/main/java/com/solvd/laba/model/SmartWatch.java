@@ -1,8 +1,8 @@
-package main.java.com.solvd.laba.model;
+package com.solvd.laba.model;
 
-import main.java.com.solvd.laba.enums.Color;
-import main.java.com.solvd.laba.enums.GadgetName;
-import main.java.com.solvd.laba.enums.GadgetType;
+import com.solvd.laba.enums.Color;
+import com.solvd.laba.enums.GadgetName;
+import com.solvd.laba.enums.GadgetType;
 
 public class SmartWatch extends Gadget {
     private float displaySize;

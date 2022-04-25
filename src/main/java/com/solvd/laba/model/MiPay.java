@@ -1,7 +1,7 @@
-package main.java.com.solvd.laba.model;
+package com.solvd.laba.model;
 
-import main.java.com.solvd.laba.exceptions.TransactionException;
-import main.java.com.solvd.laba.interfaces.Payable;
+import com.solvd.laba.exceptions.TransactionException;
+import com.solvd.laba.interfaces.Payable;
 
 public class MiPay implements Payable {
     @Override

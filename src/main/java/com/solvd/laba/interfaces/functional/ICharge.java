@@ -1,4 +1,4 @@
-package main.java.com.solvd.laba.interfaces.functional;
+package com.solvd.laba.interfaces.functional;
 
 @FunctionalInterface
 public interface ICharge<T> {

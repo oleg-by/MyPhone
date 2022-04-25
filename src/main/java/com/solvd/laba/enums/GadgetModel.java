@@ -1,4 +1,4 @@
-package main.java.com.solvd.laba.enums;
+package com.solvd.laba.enums;
 
 public enum GadgetModel {
     I13PROMAX("Iphone 13 PRO MAX"),
