@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mobilestore>
+    <customers>
+        <customer id="1" idUser="5" idAddressC="12">
+            <firstName>Anton</firstName>
+            <lastName>Zubr</lastName>
+            <phoneNumber>291051112</phoneNumber>
+        </customer>
+        <customer id="2" idUser="2" idAddressC="2">
+            <firstName>Vadim</firstName>
+            <lastName>Ivanov</lastName>
+            <phoneNumber>291113323</phoneNumber>
+        </customer>
+        <customer id="3" idUser="3" idAddressC="3">
+            <firstName>Zhanna</firstName>
+            <lastName>Aguzarova</lastName>
+            <phoneNumber>447114323</phoneNumber>
+        </customer>
+        <customer id="4" idUser="4" idAddressC="1">
+            <firstName>Valery</firstName>
+            <lastName>Leontiev</lastName>
+            <phoneNumber>332365478</phoneNumber>
+        </customer>
+        <customer id="5" idUser="1" idAddressC="13">
+            <firstName>Oleg</firstName>
+            <lastName>Bukatich</lastName>
+            <phoneNumber>293868619</phoneNumber>
+        </customer>
+        <customer id="6" idUser="6" idAddressC="14">
+            <firstName>Oksana</firstName>
+            <lastName>Ogonek</lastName>
+            <phoneNumber>441301118</phoneNumber>
+        </customer>
+        <customer id="7" idUser="7" idAddressC="15">
+            <firstName>Inokentiy</firstName>
+            <lastName>Smoktunovskiy</lastName>
+            <phoneNumber>256589966</phoneNumber>
+        </customer>
+        <customer id="8" idUser="8" idAddressC="16">
+            <firstName>Vitaly</firstName>
+            <lastName>Ivanov</lastName>
+            <phoneNumber>336718122</phoneNumber>
+        </customer>
+    </customers>
+    <users>
+        <user id="1" accountType="admin">
+            <username>olezha</username>
+            <email>allbuk@mail.ru</email>
+            <password>asdf1234</password>
+            <createTime>2022-05-05 14:53:54</createTime>
+            <birth>1990-07-20</birth>
+            <age>31</age>
+        </user>
+        <user id="2" accountType="user">
+            <username>vadik</username>
+            <email>xxx100@gmail.com</email>
+            <password>qwerty</password>
+            <createTime>2022-05-05 14:53:54</createTime>
+            <birth>1999-01-13</birth>
+            <age>23</age>
+        </user>
+        <user id="3" accountType="user">
+            <username>zhanna</username>
+            <email>zanna1@mail.ru</email>
+            <password>12345678</password>
+            <createTime>2022-05-05 14:53:54</createTime>
+            <birth>2000-02-10</birth>
+            <age>22</age>
+        </user>
+        <user id="4" accountType="user">
+            <username>pupsik111</username>
+            <email>valera@mail.ru</email>
+            <password>qwerty1</password>
+            <createTime>2022-05-05 14:53:54</createTime>
+            <birth>1985-10-14</birth>
+            <age>36</age>
+        </user>
+        <user id="5" accountType="user">
+            <username>zubr</username>
+            <email>zubr@gmail.com</email>
+            <password>111222333</password>
+            <createTime>2022-05-05 14:53:54</createTime>
+            <birth>1991-12-29</birth>
+            <age>30</age>
+        </user>
+        <user id="6" accountType="user">
+            <username>firegirl</username>
+            <email>firegirl@gmail.com</email>
+            <password>123456789</password>
+            <createTime>2022-05-05 14:53:54</createTime>
+            <birth>1998-02-28</birth>
+            <age>24</age>
+        </user>
+        <user id="7" accountType="user">
+            <username>kesha</username>
+            <email>kesha-x1x1@gmail.com</email>
+            <password>987456321</password>
+            <createTime>2022-05-05 19:22:37</createTime>
+            <birth>1985-01-01</birth>
+            <age>37</age>
+        </user>
+        <user id="8" accountType="user">
+            <username>vitalik</username>
+            <email>vitalik007@gmail.com</email>
+            <password>qwertyasdf</password>
+            <createTime>2022-05-10 18:22:00</createTime>
+            <birth>1999-11-01</birth>
+            <age>22</age>
+        </user>
+    </users>
+    <addresses>
+        <address id="1">
+            <country>Belarus</country>
+            <city>Grodno</city>
+            <street>Lenina St.</street>
+            <buildingNumber>6</buildingNumber>
+            <corp>2</corp>
+            <apt>10</apt>
+            <floor>2</floor>
+        </address>
+        <address id="2">
+            <country>Belarus</country>
+            <city>Minsk</city>
+            <street>Nyamiga St.</street>
+            <buildingNumber>5</buildingNumber>
+            <corp>0</corp>
+            <apt>12</apt>
+            <floor>1</floor>
+        </address>
+        <address id="3">
+            <country>Belarus</country>
+            <city>Minsk</city>
+            <street>Mogilevskaya St.</street>
+            <buildingNumber>1</buildingNumber>
+            <corp>0</corp>
+            <apt>14</apt>
+            <floor>1</floor>
+        </address>
+        <address id="12">
+            <country>Belarus</country>
+            <city>Gomel</city>
+            <street>Lenina St.</street>
+            <buildingNumber>5</buildingNumber>
+            <corp>2</corp>
+            <apt>105</apt>
+            <floor>5</floor>
+        </address>
+        <address id="13">
+            <country>Belarus</country>
+            <city>Brest</city>
+            <street>Lenina St.</street>
+            <buildingNumber>7</buildingNumber>
+            <corp>0</corp>
+            <apt>90</apt>
+            <floor>7</floor>
+        </address>
+        <address id="14">
+            <country>Belarus</country>
+            <city>Mogilev</city>
+            <street>Central St.</street>
+            <buildingNumber>55</buildingNumber>
+            <corp>0</corp>
+            <apt>18</apt>
+            <floor>3</floor>
+        </address>
+        <address id="15">
+            <country>Belarus</country>
+            <city>Bobruisk</city>
+            <street>Krasnaya St.</street>
+            <buildingNumber>10</buildingNumber>
+            <corp>0</corp>
+            <apt>99</apt>
+            <floor>5</floor>
+        </address>
+    </addresses>
+    <products>
+        <product id="1" idCategory="1" idDescription="1">
+            <name>Apple iPhone 13 Pro Max 1TB</name>
+            <price>2400</price>
+        </product>
+        <product id="2" idCategory="1" idDescription="2">
+        <name>Samsung Galaxy S22 Ultra 5G 12GB/1TB</name>
+        <price>2900</price>
+        </product>
+        <product id="3" idCategory="1" idDescription="3">
+            <name>Xiaomi Mi Mix 4 12GB/512GB</name>
+            <price>1725</price>
+        </product>
+        <product id="4" idCategory="1" idDescription="4">
+            <name>HUAWEI P50 PRO</name>
+            <price>1200</price>
+        </product>
+    </products>
+    <orders>
+        <order id="1" idCustomer="4" idDelivery="1" idPayment="1">
+            <idProduct>1</idProduct>
+            <count>1</count>
+            <unitPrice>2400</unitPrice>
+        </order>
+        <order id="2" idCustomer="2" idDelivery="3" idPayment="3">
+            <idProduct>3</idProduct>
+            <count>2</count>
+            <unitPrice>1725</unitPrice>
+        </order>
+        <order id="3" idCustomer="3" idDelivery="2" idPayment="2">
+            <idProduct>2</idProduct>
+            <count>1</count>
+            <unitPrice>2900</unitPrice>
+        </order>
+        <order id="4" idCustomer="1" idDelivery="1" idPayment="1">
+            <idProduct>1</idProduct>
+            <count>3</count>
+            <unitPrice>2400</unitPrice>
+        </order>
+        <order id="5" idCustomer="1" idDelivery="1" idPayment="1">
+            <idProduct>1</idProduct>
+            <count>3</count>
+            <unitPrice>2400</unitPrice>
+        </order>
+        <order id="6" idCustomer="5" idDelivery="2" idPayment="1">
+            <idProduct>2</idProduct>
+            <count>2</count>
+            <unitPrice>2900</unitPrice>
+        </order>
+        <order id="7" idCustomer="6" idDelivery="3" idPayment="2">
+            <idProduct>3</idProduct>
+            <count>5</count>
+            <unitPrice>1725</unitPrice>
+        </order>
+        <order id="8" idCustomer="7" idDelivery="4" idPayment="3">
+            <idProduct>3</idProduct>
+            <count>1</count>
+            <unitPrice>1725</unitPrice>
+        </order>
+        <order id="9" idCustomer="6" idDelivery="3" idPayment="2">
+            <idProduct>3</idProduct>
+            <count>5</count>
+            <unitPrice>1725</unitPrice>
+        </order>
+        <order id="10" idCustomer="8" idDelivery="3" idPayment="2">
+            <idProduct>1</idProduct>
+            <count>3</count>
+            <unitPrice>2400</unitPrice>
+        </order>
+    </orders>
+</mobilestore>
