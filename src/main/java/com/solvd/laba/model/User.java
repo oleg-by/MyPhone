@@ -1,11 +1,17 @@
 package com.solvd.laba.model;
 
 import com.solvd.laba.enums.AccountType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 
+@XmlRootElement(name = "user")
+@XmlType(propOrder = {"id", "username", "email", "password", "createTime", "accountType", "birth", "age"})
 public class User {
     private int id;
     private String username;
@@ -14,6 +20,7 @@ public class User {
     private String createTime;
     private AccountType accountType;
     private String birth;
+    @XmlElement
     private int age;
 
     public User() {
@@ -33,7 +40,7 @@ public class User {
     public int getId() {
         return id;
     }
-
+    @XmlAttribute
     public void setId(int id) {
         this.id = id;
     }
@@ -41,7 +48,7 @@ public class User {
     public String getUsername() {
         return username;
     }
-
+    @XmlElement
     public void setUsername(String username) {
         this.username = username;
     }
@@ -49,7 +56,7 @@ public class User {
     public String getEmail() {
         return email;
     }
-
+    @XmlElement
     public void setEmail(String email) {
         this.email = email;
     }
@@ -57,7 +64,7 @@ public class User {
     public String getPassword() {
         return password;
     }
-
+    @XmlElement
     public void setPassword(String password) {
         this.password = password;
     }
@@ -65,7 +72,7 @@ public class User {
     public String getCreateTime() {
         return createTime;
     }
-
+    @XmlElement
     public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
@@ -73,7 +80,7 @@ public class User {
     public AccountType getAccountType() {
         return accountType;
     }
-
+    @XmlElement
     public void setAccountType(AccountType accountType) {
         this.accountType = accountType;
     }
@@ -81,7 +88,7 @@ public class User {
     public String getBirth() {
         return birth;
     }
-
+    @XmlElement
     public void setBirth(String birth) {
         this.birth = birth;
         age = calculateAge();

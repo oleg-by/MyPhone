@@ -44,11 +44,11 @@ public class DOMTest {
         } catch (IOException e) {
             LOGGER.error(e.getMessage());
         }
-        collectInformation(doc, CUSTOMER);
-        collectInformation(doc, USER);
-        collectInformation(doc, ADDRESS);
-        collectInformation(doc, PRODUCT);
-        collectInformation(doc, ORDER);
+        collectData(doc, CUSTOMER);
+        collectData(doc, USER);
+        collectData(doc, ADDRESS);
+        collectData(doc, PRODUCT);
+        collectData(doc, ORDER);
         LOGGER.info(customerList);
         LOGGER.info(userList);
         LOGGER.info(addressList);
@@ -56,7 +56,7 @@ public class DOMTest {
         LOGGER.info(orderList);
     }
 
-    private static void collectInformation(Document document, final String tagname) {
+    private static void collectData(Document document, final String tagname) {
         NodeList nodeList = null;
         if (document != null) {
             nodeList = document.getElementsByTagName(tagname);
@@ -65,12 +65,12 @@ public class DOMTest {
         if (nodeList != null) {
             length = nodeList.getLength();
         }
-        for(int i = 0; i < length; i++){
+        for (int i = 0; i < length; i++) {
             Node node = nodeList.item(i);
             Element element = (Element) node;
             NamedNodeMap attributes = node.getAttributes();
-            switch (tagname){
-                case CUSTOMER:{
+            switch (tagname) {
+                case CUSTOMER: {
                     Customer customer = new Customer();
                     customer.setId(Integer.parseInt(attributes.getNamedItem("id").getNodeValue()));
                     customer.setIdUser(Integer.parseInt(attributes.getNamedItem("idUser").getNodeValue()));
@@ -79,8 +79,9 @@ public class DOMTest {
                     customer.setLastName(element.getElementsByTagName("lastName").item(0).getTextContent());
                     customer.setPhoneNumber(Long.parseLong(element.getElementsByTagName("phoneNumber").item(0).getTextContent()));
                     customerList.add(customer);
-                } break;
-                case USER:{
+                }
+                break;
+                case USER: {
                     User user = new User();
                     user.setId(Integer.parseInt(attributes.getNamedItem("id").getNodeValue()));
                     user.setUsername(element.getElementsByTagName("username").item(0).getTextContent());
@@ -90,8 +91,9 @@ public class DOMTest {
                     user.setAccountType(AccountType.valueOf(attributes.getNamedItem("accountType").getNodeValue().toUpperCase()));
                     user.setBirth(element.getElementsByTagName("birth").item(0).getTextContent());
                     userList.add(user);
-                } break;
-                case ADDRESS:{
+                }
+                break;
+                case ADDRESS: {
                     Address address = new Address();
                     address.setId(Integer.parseInt(attributes.getNamedItem("id").getNodeValue()));
                     address.setCountry(element.getElementsByTagName("country").item(0).getTextContent());
@@ -102,8 +104,9 @@ public class DOMTest {
                     address.setApt(Integer.parseInt(element.getElementsByTagName("apt").item(0).getTextContent()));
                     address.setFloor(Integer.parseInt(element.getElementsByTagName("floor").item(0).getTextContent()));
                     addressList.add(address);
-                } break;
-                case PRODUCT:{
+                }
+                break;
+                case PRODUCT: {
                     Product product = new Product();
                     product.setId(Integer.parseInt(attributes.getNamedItem("id").getNodeValue()));
                     product.setIdCategory(Integer.parseInt(attributes.getNamedItem("idCategory").getNodeValue()));
@@ -111,7 +114,8 @@ public class DOMTest {
                     product.setName(element.getElementsByTagName("name").item(0).getTextContent());
                     product.setPrice(Float.parseFloat(element.getElementsByTagName("price").item(0).getTextContent()));
                     productList.add(product);
-                } break;
+                }
+                break;
                 case ORDER: {
                     Order order = new Order();
                     order.setId(Integer.parseInt(attributes.getNamedItem("id").getNodeValue()));
@@ -122,7 +126,8 @@ public class DOMTest {
                     order.setCount(Integer.parseInt(element.getElementsByTagName("count").item(0).getTextContent()));
                     order.setUnitPrice(Float.parseFloat(element.getElementsByTagName("unitPrice").item(0).getTextContent()));
                     orderList.add(order);
-                } break;
+                }
+                break;
             }
         }
     }

@@ -23,9 +23,9 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class Runner {
+public class MainProjectRunner {
 
-    private static final Logger LOGGER = LogManager.getLogger(Runner.class);
+    private static final Logger LOGGER = LogManager.getLogger(MainProjectRunner.class);
 
     public static void main(String[] args) {
 

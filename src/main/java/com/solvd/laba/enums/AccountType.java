@@ -1,7 +1,16 @@
 package com.solvd.laba.enums;
 
+import jakarta.xml.bind.annotation.XmlEnum;
+import jakarta.xml.bind.annotation.XmlEnumValue;
+import jakarta.xml.bind.annotation.XmlType;
+
+@XmlType
+@XmlEnum
 public enum AccountType {
+    @XmlEnumValue("admin")
     ADMIN("admin"),
+
+    @XmlEnumValue("user")
     USER("user");
 
     private final String type;
