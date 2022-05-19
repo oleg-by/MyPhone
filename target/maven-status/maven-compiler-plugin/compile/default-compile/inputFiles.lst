@@ -17,6 +17,7 @@ D:\dev\MyPhone\src\main\java\com\solvd\laba\interfaces\Camerable.java
 D:\dev\MyPhone\src\main\java\com\solvd\laba\model\Order.java
 D:\dev\MyPhone\src\main\java\com\solvd\laba\model\Gadget.java
 D:\dev\MyPhone\src\main\java\com\solvd\laba\dao\IUserDAO.java
+D:\dev\MyPhone\src\main\java\com\solvd\laba\parsers\DateAdapter.java
 D:\dev\MyPhone\src\main\java\com\solvd\laba\enums\GadgetBrand.java
 D:\dev\MyPhone\src\main\java\com\solvd\laba\dao\ICustomerDAO.java
 D:\dev\MyPhone\src\main\java\com\solvd\laba\enums\Color.java
@@ -46,6 +47,7 @@ D:\dev\MyPhone\src\main\java\com\solvd\laba\interfaces\Chargerable.java
 D:\dev\MyPhone\src\main\java\com\solvd\laba\interfaces\functional\IConvert.java
 D:\dev\MyPhone\src\main\java\com\solvd\laba\dao\IBaseDAO.java
 D:\dev\MyPhone\src\main\java\com\solvd\laba\interfaces\functional\ICompare.java
+D:\dev\MyPhone\src\main\java\com\solvd\laba\parsers\CustomerTest.java
 D:\dev\MyPhone\src\main\java\com\solvd\laba\dao\IAddressDAO.java
 D:\dev\MyPhone\src\main\java\com\solvd\laba\model\Transaction.java
 D:\dev\MyPhone\src\main\java\com\solvd\laba\parsers\JAXBTest.java

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<customer id="11">
+    <firstName>Vladimir</firstName>
+    <lastName>Ivanov</lastName>
+    <phoneNumber>296718122</phoneNumber>
+    <dateOfBirth>1989-11-01</dateOfBirth>
+    <user id="11">
+        <username>volodya</username>
+        <email>volodya@mail.ru</email>
+        <password>112233665544</password>
+        <createTime>2022-05-19 12:22:00</createTime>
+        <accountType>user</accountType>
+        <birth>1989-11-01</birth>
+        <age>32</age>
+    </user>
+    <orders>
+        <order id="1" idCustomer="11" idDelivery="2" idPayment="2">
+            <idProduct>1</idProduct>
+            <count>4</count>
+            <unitPrice>2400.0</unitPrice>
+            <orderAmount>9600.0</orderAmount>
+        </order>
+        <order id="2" idCustomer="11" idDelivery="2" idPayment="2">
+            <idProduct>2</idProduct>
+            <count>3</count>
+            <unitPrice>2000.0</unitPrice>
+            <orderAmount>6000.0</orderAmount>
+        </order>
+        <order id="3" idCustomer="11" idDelivery="2" idPayment="2">
+            <idProduct>3</idProduct>
+            <count>2</count>
+            <unitPrice>1200.0</unitPrice>
+            <orderAmount>2400.0</orderAmount>
+        </order>
+    </orders>
+</customer>

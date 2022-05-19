@@ -140,6 +140,7 @@ public class User {
                 ", createTime='" + createTime + '\'' +
                 ", accountType=" + accountType +
                 ", birth='" + birth + '\'' +
+                ", age=" + age +
                 '}';
     }
 }

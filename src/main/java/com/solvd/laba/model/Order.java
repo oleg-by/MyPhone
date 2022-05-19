@@ -1,11 +1,19 @@
 package com.solvd.laba.model;
 
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
+
+@XmlRootElement(name = "order")
+@XmlType(propOrder = {"id", "idCustomer", "idProduct", "count", "unitPrice", "orderAmount", "idDelivery", "idPayment"})
 public class Order {
     private int id;
     private int idCustomer;
     private int idProduct;
     private int count;
     private float unitPrice;
+    @XmlElement
     private float orderAmount;
     private int idDelivery;
     private int idPayment;
@@ -27,7 +35,7 @@ public class Order {
     public int getId() {
         return id;
     }
-
+    @XmlAttribute
     public void setId(int id) {
         this.id = id;
     }
@@ -35,7 +43,7 @@ public class Order {
     public int getIdCustomer() {
         return idCustomer;
     }
-
+    @XmlAttribute
     public void setIdCustomer(int idCustomer) {
         this.idCustomer = idCustomer;
     }
@@ -43,7 +51,7 @@ public class Order {
     public int getIdProduct() {
         return idProduct;
     }
-
+    @XmlElement
     public void setIdProduct(int idProduct) {
         this.idProduct = idProduct;
     }
@@ -51,7 +59,7 @@ public class Order {
     public int getCount() {
         return count;
     }
-
+    @XmlElement
     public void setCount(int count) {
         this.count = count;
         this.orderAmount = this.count * this.unitPrice;
@@ -60,7 +68,7 @@ public class Order {
     public float getUnitPrice() {
         return unitPrice;
     }
-
+    @XmlElement
     public void setUnitPrice(float unitPrice) {
         this.unitPrice = unitPrice;
         this.orderAmount = this.count * this.unitPrice;
@@ -73,7 +81,7 @@ public class Order {
     public int getIdDelivery() {
         return idDelivery;
     }
-
+    @XmlAttribute
     public void setIdDelivery(int idDelivery) {
         this.idDelivery = idDelivery;
     }
@@ -81,7 +89,7 @@ public class Order {
     public int getIdPayment() {
         return idPayment;
     }
-
+    @XmlAttribute
     public void setIdPayment(int idPayment) {
         this.idPayment = idPayment;
     }
@@ -119,14 +127,14 @@ public class Order {
     @Override
     public String toString() {
         return "Order{" +
-                "id=" + id +
-                ", idCustomer=" + idCustomer +
-                ", idProduct=" + idProduct +
+                "ID=" + id +
+                ", customer ID=" + idCustomer +
+                ", product ID=" + idProduct +
                 ", count=" + count +
-                ", unitPrice=" + unitPrice +
-                ", orderAmount=" + orderAmount +
-                ", idDelivery=" + idDelivery +
-                ", idPayment=" + idPayment +
+                ", unit price=$" + unitPrice +
+                ", order amount=$" + orderAmount +
+                ", delivery ID=" + idDelivery +
+                ", payment ID=" + idPayment +
                 '}';
     }
 }

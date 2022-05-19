@@ -1,9 +1,11 @@
+com\solvd\laba\parsers\DateAdapter.class
 com\solvd\laba\exceptions\BatteryException.class
 com\solvd\laba\interfaces\Chargerable.class
 com\solvd\laba\dao\IUserDAO.class
 com\solvd\laba\interfaces\functional\IConvert.class
 com\solvd\laba\model\Cpu.class
 com\solvd\laba\parsers\JAXBTest.class
+com\solvd\laba\parsers\CustomerTest.class
 com\solvd\laba\model\Order.class
 com\solvd\laba\model\Gadget.class
 com\solvd\laba\dao\IOrderDAO.class
