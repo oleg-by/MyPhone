@@ -32,6 +32,8 @@ public class JacksonTest {
                     , new SimpleDateFormat("yyyy-MM-dd").parse("1990-07-20"), purchases);
 
             objectMapper.writeValue(new File(System.getProperty("user.dir") + "/src/main/resources/user.json"), userTest);
+            UserTest u = objectMapper.readValue(new File(System.getProperty("user.dir") + "/src/main/resources/user.json"), UserTest.class);
+            LOGGER.info(u);
 
         } catch (JsonParseException e) {
             LOGGER.error(e.getMessage());
