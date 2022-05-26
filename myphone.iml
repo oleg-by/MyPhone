@@ -10,6 +10,10 @@
       <excludeFolder url="file://$MODULE_DIR$/${project.build.directory}/classes" />
       <excludeFolder url="file://$MODULE_DIR$/${project.build.directory}/test-classes" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/inspectionProfiles" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/libraries" />
+      <excludeFolder url="file://$MODULE_DIR$/${project.build.directory}" />
+      <excludeFolder url="file://$MODULE_DIR$/logs" />
     </content>
     <orderEntry type="jdk" jdkName="11" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -38,5 +42,7 @@
       </library>
     </orderEntry>
     <orderEntry type="library" exported="" name="fasterxml.jackson.core.databind" level="project" />
+    <orderEntry type="library" exported="" name="mysql-connector-java-8.0.29" level="project" />
+    <orderEntry type="library" exported="" name="mybatis" level="project" />
   </component>
 </module>

@@ -16,6 +16,7 @@ import java.util.List;
 
 public class JacksonTest {
     private static final Logger LOGGER = LogManager.getLogger(JacksonTest.class);
+
     public static void main(String[] args) throws ParseException {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
@@ -30,14 +31,14 @@ public class JacksonTest {
                     , new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2022-05-10 10:55:00")
                     , new SimpleDateFormat("yyyy-MM-dd").parse("1990-07-20"), purchases);
             File file = new File(System.getProperty("user.dir") + "/src/main/resources/user.json");
-            if(!file.exists()){
+            if (!file.exists()) {
                 file.createNewFile();
             }
             objectMapper.writeValue(file, userTest);
             JavaType type = objectMapper.getTypeFactory().constructCollectionType(List.class, UserTest.class);
             List<UserTest> userTestList = objectMapper.readValue(new File(System.getProperty("user.dir") + "/src/main/resources/users.json"), type);
             //UserTest u = objectMapper.readValue(new File(System.getProperty("user.dir") + "/src/main/resources/user.json"), UserTest.class);
-            for(UserTest u : userTestList){
+            for (UserTest u : userTestList) {
                 LOGGER.info(u);
             }
         } catch (JsonParseException e) {

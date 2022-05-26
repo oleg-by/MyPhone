@@ -37,6 +37,14 @@ public class User {
         age = calculateAge();
     }
 
+    public User(String username, String email, String password, AccountType accountType, String birth) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.accountType = accountType;
+        this.birth = birth;
+    }
+
     public int getId() {
         return id;
     }

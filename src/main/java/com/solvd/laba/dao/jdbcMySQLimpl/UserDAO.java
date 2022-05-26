@@ -5,86 +5,147 @@ import com.solvd.laba.enums.AccountType;
 import com.solvd.laba.model.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import java.sql.*;
 
 public class UserDAO implements IUserDAO {
 
     private static final Logger LOGGER = LogManager.getLogger(UserDAO.class);
 
-    private final Connection connection;
+    private MyConnectionPool pool = MyConnectionPool.getInstance();
 
-    public UserDAO(final Connection connection) {
-        this.connection = connection;
+    public UserDAO() {
+
     }
 
     @Override
     public void saveEntity(User user) {
+        Connection connection = pool.getConnection();
         String query = "INSERT INTO users (id, username, email, password, create_time, account_type, birth, age)" +
                 " VALUES ((?), (?), (?), (?), (?), (?), (?), (?))";
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, user.getId());
-            statement.setString(2, user.getUsername());
-            statement.setString(3, user.getEmail());
-            statement.setString(4, user.getPassword());
-            statement.setString(5, user.getCreateTime());
-            statement.setString(6, user.getAccountType().toString());
-            statement.setString(7, user.getBirth());
-            statement.setInt(8, user.getAge());
-            statement.executeUpdate();
+        try (PreparedStatement pr = connection.prepareStatement(query)) {
+            pr.setInt(1, user.getId());
+            pr.setString(2, user.getUsername());
+            pr.setString(3, user.getEmail());
+            pr.setString(4, user.getPassword());
+            pr.setString(5, user.getCreateTime());
+            pr.setString(6, user.getAccountType().toString());
+            pr.setString(7, user.getBirth());
+            pr.setInt(8, user.getAge());
+            pr.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
+        } finally {
+            try {
+                if (connection != null) pool.releaseConnection(connection);
+            } catch (SQLException e) {
+                LOGGER.error(e.getMessage());
+            }
         }
     }
 
     @Override
     public User getEntityById(int id) {
+        Connection connection = pool.getConnection();
         User result = new User();
         String query = "SELECT * FROM users WHERE id = (?)";
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, id);
-            statement.execute();
-            ResultSet rs = statement.getResultSet();
-            while (rs.next()) {
-                result.setId(rs.getInt("id"));
-                result.setUsername(rs.getString("username"));
-                result.setEmail(rs.getString("email"));
-                result.setPassword(rs.getString("password"));
-                result.setCreateTime(rs.getString("create_time"));
-                result.setAccountType(AccountType.valueOf(rs.getString("account_type").toUpperCase()));
-                result.setBirth(rs.getString("birth"));
+        try (PreparedStatement pr = connection.prepareStatement(query)) {
+            pr.setInt(1, id);
+            pr.execute();
+            try (ResultSet rs = pr.getResultSet()) {
+                while (rs.next()) {
+                    result.setId(rs.getInt("id"));
+                    result.setUsername(rs.getString("username"));
+                    result.setEmail(rs.getString("email"));
+                    result.setPassword(rs.getString("password"));
+                    result.setCreateTime(rs.getString("create_time"));
+                    result.setAccountType(AccountType.valueOf(rs.getString("account_type").toUpperCase()));
+                    result.setBirth(rs.getString("birth"));
+                }
             }
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
+        } finally {
+            try {
+                if (connection != null) pool.releaseConnection(connection);
+            } catch (SQLException e) {
+                LOGGER.error(e.getMessage());
+            }
         }
         return result;
     }
 
     @Override
     public void updateEntity(User user) {
+        Connection connection = pool.getConnection();
         String query = "UPDATE users SET username = (?), email = (?), password = (?), account_type = (?), birth = (?), age = (?)"
                 + " WHERE id = (?)";
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, user.getUsername());
-            statement.setString(2, user.getEmail());
-            statement.setString(3, user.getPassword());
-            statement.setString(4, user.getAccountType().toString());
-            statement.setString(5, user.getBirth());
-            statement.setInt(6, user.getAge());
-            statement.setInt(7, user.getId());
-            statement.executeUpdate();
+        try (PreparedStatement pr = connection.prepareStatement(query)) {
+            pr.setString(1, user.getUsername());
+            pr.setString(2, user.getEmail());
+            pr.setString(3, user.getPassword());
+            pr.setString(4, user.getAccountType().toString());
+            pr.setString(5, user.getBirth());
+            pr.setInt(6, user.getAge());
+            pr.setInt(7, user.getId());
+            pr.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
+        } finally {
+            try {
+                if (connection != null) pool.releaseConnection(connection);
+            } catch (SQLException e) {
+                LOGGER.error(e.getMessage());
+            }
         }
     }
 
     @Override
     public void removeEntity(int id) {
+        Connection connection = pool.getConnection();
         String query = "DELETE FROM users WHERE id = (?)";
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, id);
-            statement.executeUpdate();
+        try (PreparedStatement pr = connection.prepareStatement(query)) {
+            pr.setInt(1, id);
+            pr.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
+        } finally {
+            try {
+                if (connection != null) pool.releaseConnection(connection);
+            } catch (SQLException e) {
+                LOGGER.error(e.getMessage());
+            }
         }
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        Connection connection = pool.getConnection();
+        User result = new User();
+        String query = "SELECT * FROM users WHERE email = (?)";
+        try (PreparedStatement pr = connection.prepareStatement(query)) {
+            pr.setString(1, email);
+            pr.execute();
+            try (ResultSet rs = pr.getResultSet()) {
+                while (rs.next()) {
+                    result.setId(rs.getInt("id"));
+                    result.setUsername(rs.getString("username"));
+                    result.setEmail(rs.getString("email"));
+                    result.setPassword(rs.getString("password"));
+                    result.setCreateTime(rs.getString("create_time"));
+                    result.setAccountType(AccountType.valueOf(rs.getString("account_type").toUpperCase()));
+                    result.setBirth(rs.getString("birth"));
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+        } finally {
+            try {
+                if (connection != null) pool.releaseConnection(connection);
+            } catch (SQLException e) {
+                LOGGER.error(e.getMessage());
+            }
+        }
+        return result;
     }
 }

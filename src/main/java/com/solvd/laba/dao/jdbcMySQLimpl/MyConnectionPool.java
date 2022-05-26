@@ -1,94 +1,85 @@
 package com.solvd.laba.dao.jdbcMySQLimpl;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Stack;
+import java.util.*;
 
 public class MyConnectionPool {
-    private final String dbUrl;
-    private final String userName;
-    private final String password;
-    private final int Size;
-    private int connNumber = 0;
 
-    private static final String SQL_TEST_QUERY = "SELECT 1";
+    private static final Logger LOGGER = LogManager.getLogger(MyConnectionPool.class);
+    private static MyConnectionPool instance = null;
+    private static final int INITIAL_POOL_SIZE = 5;
 
-    Stack<Connection> freePool = new Stack<>();
-    Set<Connection> occupiedPool = new HashSet<>();
-
-    public MyConnectionPool(String dbUrl, String userName, String password, int maxSize) {
-        this.dbUrl = dbUrl;
-        this.userName = userName;
-        this.password = password;
-        this.Size = maxSize;
+    private MyConnectionPool() {
     }
 
-    public synchronized Connection getConnection() throws SQLException {
-        Connection connection;
-        if (isFull()) {
-            throw new SQLException("The connection pool is full.");
+    private static List<Connection> freeConnections = new ArrayList<>();
+    private static List<Connection> usedConnections = new ArrayList<>();
+
+    public static synchronized MyConnectionPool getInstance() {
+        if (instance == null) {
+            instance = new MyConnectionPool();
+            create();
         }
-        connection = getConnectionFromPool();
-        if (connection == null) {
-            connection = createNewConnectionForPool();
+        return instance;
+    }
+
+    public static void create() {
+        Properties p = new Properties();
+        FileInputStream fileInputStream;
+        try {
+            fileInputStream = new FileInputStream(System.getProperty("user.dir") + "/src/main/resources/db.properties");
+            p.load(fileInputStream);
+            fileInputStream.close();
+        } catch (FileNotFoundException e) {
+            LOGGER.error(e.getMessage());
+        } catch (IOException e) {
+            LOGGER.error(e.getMessage());
         }
-        connection = makeAvailable(connection);
+
+        String url = p.getProperty("jdbc.url");
+        String userName = p.getProperty("jdbc.username");
+        String password = p.getProperty("jdbc.password");
+
+        for (int i = 0; i < INITIAL_POOL_SIZE; i++) {
+            freeConnections.add(createConnection(url, userName, password));
+        }
+    }
+
+    public synchronized Connection getConnection() {
+        Connection connection = freeConnections.remove(freeConnections.size() - 1);
+        usedConnections.add(connection);
         return connection;
     }
 
-    public synchronized void returnConnection(Connection connection) throws SQLException {
-        if (connection == null) {
-            throw new NullPointerException();
+    public synchronized void releaseConnection(Connection connection) throws SQLException {
+        if (connection != null) {
+            if (usedConnections.remove(connection)) {
+                freeConnections.add(connection);
+            } else {
+                throw new SQLException("The connection has already returned or it's not for this pool.");
+            }
         }
-        if (!occupiedPool.remove(connection)) {
-            throw new SQLException("The connection has already returned or it's not for this pool.");
-        }
-        freePool.push(connection);
     }
 
-    private synchronized boolean isFull() {
-        return ((freePool.size() == 0) && (connNumber >= Size));
-    }
-
-    private Connection createNewConnectionForPool() throws SQLException {
-        Connection connection = DriverManager.getConnection(dbUrl, userName, password);
-        connNumber++;
-        occupiedPool.add(connection);
-        return connection;
-    }
-
-    private Connection getConnectionFromPool() {
-        Connection connection = null;
-        if (freePool.size() > 0) {
-            connection = freePool.pop();
-            occupiedPool.add(connection);
-        }
-        return connection;
-    }
-
-    private Connection makeAvailable(Connection connection) throws SQLException {
-        if (isConnectionAvailable(connection)) {
-            return connection;
-        }
-        occupiedPool.remove(connection);
-        connNumber--;
-        connection.close();
-        connection = DriverManager.getConnection(dbUrl, userName, password);
-        occupiedPool.add(connection);
-        connNumber++;
-        return connection;
-    }
-
-    private boolean isConnectionAvailable(Connection connection) {
-        try (Statement st = connection.createStatement()) {
-            st.executeQuery(SQL_TEST_QUERY);
-            return true;
+    private static Connection createConnection(String url, String user, String password) {
+        try {
+            return DriverManager.getConnection(url, user, password);
         } catch (SQLException e) {
-            return false;
+            LOGGER.error(e.getMessage());
         }
+        return null;
     }
+
+    public int getSize() {
+        return freeConnections.size() + usedConnections.size();
+    }
+
 }
