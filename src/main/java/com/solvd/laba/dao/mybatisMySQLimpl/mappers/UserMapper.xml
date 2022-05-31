@@ -1,0 +1,50 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.laba.dao.IUserDAO">
+    <resultMap type="User" id="UserResultMap" autoMapping="false">
+        <result property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="email" column="email"/>
+        <result property="password" column="password"/>
+        <result property="createTime" column="create_time"/>
+        <result property="accountType" column="account_type"/>
+        <result property="birth" column="birth"/>
+        <result property="age" column="age"/>
+    </resultMap>
+    <insert id="saveEntity" useGeneratedKeys="true" keyProperty="id">
+        <![CDATA[
+        INSERT INTO users (username, email, password, account_type, birth)
+        VALUES (#{username}, #{email}, #{password}, #{account_type}, #{birth});
+        ]]>
+    </insert>
+    <update id="updateEntity" parameterType = "User">
+        <![CDATA[
+        UPDATE users SET
+        username = #{username},
+        email = #{email},
+        password = #{password},
+        account_type = #{account_type},
+        birth = #{birth}
+        WHERE id = #{id};
+        ]]>
+    </update>
+    <delete id = "deleteEntity" parameterType = "int">
+        <![CDATA[
+        DELETE from users WHERE id = #{id};
+        ]]>
+    </delete>
+    <select id = "getEntityById" parameterType = "int" resultMap = "UserResultMap">
+        <![CDATA[
+        SELECT * FROM users WHERE id = #{id};
+        ]]>
+    </select>
+    <select id = "getUserByEmail" parameterType = "String" resultMap = "UserResultMap">
+        <![CDATA[
+        SELECT * FROM users WHERE email = #{email};
+        ]]>
+    </select>
+</mapper>
