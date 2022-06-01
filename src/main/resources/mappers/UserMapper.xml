@@ -11,14 +11,14 @@
         <result property="email" column="email"/>
         <result property="password" column="password"/>
         <result property="createTime" column="create_time"/>
-        <result property="accountType" column="account_type"/>
+        <result property="accountType" column="account_type" javaType="com.solvd.laba.enums.AccountType" typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>
         <result property="birth" column="birth"/>
         <result property="age" column="age"/>
     </resultMap>
-    <insert id="saveEntity" useGeneratedKeys="true" keyProperty="id">
+    <insert id="saveEntity" parameterType="User" useGeneratedKeys="true" keyProperty="id">
         <![CDATA[
-        INSERT INTO users (username, email, password, account_type, birth)
-        VALUES (#{username}, #{email}, #{password}, #{account_type}, #{birth});
+        INSERT INTO users (username, email, password, account_type, birth, age)
+        VALUES (#{username}, #{email}, #{password}, #{accountType.type}, #{birth}, #{age});
         ]]>
     </insert>
     <update id="updateEntity" parameterType = "User">
@@ -27,24 +27,25 @@
         username = #{username},
         email = #{email},
         password = #{password},
-        account_type = #{account_type},
+        create_time = #{createTime},
+        account_type = #{accountType.type},
         birth = #{birth}
         WHERE id = #{id};
         ]]>
     </update>
-    <delete id = "deleteEntity" parameterType = "int">
+    <delete id = "removeEntity" parameterType = "int">
         <![CDATA[
         DELETE from users WHERE id = #{id};
         ]]>
     </delete>
     <select id = "getEntityById" parameterType = "int" resultMap = "UserResultMap">
         <![CDATA[
-        SELECT * FROM users WHERE id = #{id};
+        SELECT id, username, email, password, create_time, UPPER(account_type), birth, age FROM users WHERE id = #{id};
         ]]>
     </select>
     <select id = "getUserByEmail" parameterType = "String" resultMap = "UserResultMap">
         <![CDATA[
-        SELECT * FROM users WHERE email = #{email};
+        SELECT id, username, email, password, create_time, UPPER(account_type), birth, age FROM users WHERE email = #{email};
         ]]>
     </select>
 </mapper>

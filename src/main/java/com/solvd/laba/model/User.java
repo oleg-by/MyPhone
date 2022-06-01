@@ -7,6 +7,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlType;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 
@@ -43,6 +44,8 @@ public class User {
         this.password = password;
         this.accountType = accountType;
         this.birth = birth;
+        createTime = String.valueOf(LocalDateTime.now());
+        age = calculateAge();
     }
 
     public int getId() {
