@@ -4,7 +4,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.solvd.laba.dao.ICustomerDAODAO">
+<mapper namespace="com.solvd.laba.dao.ICustomerDAO">
     <resultMap type="Customer" id="CustomerResultMap" autoMapping="false">
         <result property="id" column="id"/>
         <result property="firstName" column="first_name"/>
@@ -13,13 +13,13 @@
         <result property="idAddressC" column="id_address_c"/>
         <result property="idUser" column="id_user"/>
     </resultMap>
-    <insert id="saveEntity" parameterType="Customer" useGeneratedKeys="true" keyProperty="id">
+    <insert id="saveCustomer" parameterType="Customer" useGeneratedKeys="true" keyProperty="id">
         <![CDATA[
-        INSERT INTO customers (first_name, last_name, phone_number, id_address_c, id_user)
-        VALUES (#{firstName}, #{lastName}, #{phoneNumber}, #{idAddressC}, #{idUser});
+        INSERT INTO customers (id, first_name, last_name, phone_number, id_address_c, id_user)
+        VALUES (#{id}, #{firstName}, #{lastName}, #{phoneNumber}, #{idAddressC}, #{idUser});
         ]]>
     </insert>
-    <update id="updateEntity" parameterType = "Customer">
+    <update id="updateCustomer" parameterType = "Customer">
         <![CDATA[
         UPDATE customers SET
         first_name = #{firstName},
@@ -30,12 +30,12 @@
         WHERE id = #{id};
         ]]>
     </update>
-    <delete id = "removeEntity" parameterType = "int">
+    <delete id = "removeCustomer" parameterType = "int">
         <![CDATA[
         DELETE from customers WHERE id = #{id};
         ]]>
     </delete>
-    <select id = "getEntityById" parameterType = "int" resultMap = "CustomerResultMap">
+    <select id = "getCustomerById" parameterType = "int" resultMap = "CustomerResultMap">
         <![CDATA[
         SELECT * FROM customers WHERE id = #{id};
         ]]>

@@ -15,30 +15,29 @@
         <result property="birth" column="birth"/>
         <result property="age" column="age"/>
     </resultMap>
-    <insert id="saveEntity" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+    <insert id="saveUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
         <![CDATA[
-        INSERT INTO users (username, email, password, account_type, birth, age)
-        VALUES (#{username}, #{email}, #{password}, #{accountType.type}, #{birth}, #{age});
+        INSERT INTO users (id, username, email, password, account_type, birth, age)
+        VALUES (#{id}, #{username}, #{email}, #{password}, #{accountType.type}, #{birth}, #{age});
         ]]>
     </insert>
-    <update id="updateEntity" parameterType = "User">
+    <update id="updateUser" parameterType="User">
         <![CDATA[
         UPDATE users SET
         username = #{username},
         email = #{email},
         password = #{password},
         create_time = #{createTime},
-        account_type = #{accountType.type},
         birth = #{birth}
         WHERE id = #{id};
         ]]>
     </update>
-    <delete id = "removeEntity" parameterType = "int">
+    <delete id = "removeUser" parameterType = "int">
         <![CDATA[
         DELETE from users WHERE id = #{id};
         ]]>
     </delete>
-    <select id = "getEntityById" parameterType = "int" resultMap = "UserResultMap">
+    <select id = "getUserById" parameterType = "int" resultMap = "UserResultMap">
         <![CDATA[
         SELECT id, username, email, password, create_time, UPPER(account_type), birth, age FROM users WHERE id = #{id};
         ]]>

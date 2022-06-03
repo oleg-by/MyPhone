@@ -7,33 +7,33 @@
 <mapper namespace="com.solvd.laba.dao.IProductDAO">
     <resultMap type="Product" id="ProductResultMap" autoMapping="false">
         <result property="id" column="id"/>
-        <result property="idCategory" column="idCategory"/>
+        <result property="idCategory" column="id_category"/>
         <result property="name" column="name"/>
         <result property="price" column="price"/>
-        <result property="idDescription" column="idDescription"/>
+        <result property="idDescription" column="id_description"/>
     </resultMap>
-    <insert id="saveEntity" parameterType="Product" useGeneratedKeys="true" keyProperty="id">
+    <insert id="saveProduct" parameterType="Product" useGeneratedKeys="true" keyProperty="id">
         <![CDATA[
         INSERT INTO products (id, id_category, name, price, id_description)
         VALUES (#{id}, #{idCategory}, #{name}, #{price}, #{idDescription});
         ]]>
     </insert>
-    <update id="updateEntity" parameterType = "Product">
+    <update id="updateProduct" parameterType = "Product">
         <![CDATA[
         UPDATE products SET
         id_category = #{idCategory},
         name = #{name},
         price = #{price},
-        id_description = idDescription
+        id_description = #{idDescription}
         WHERE id = #{id};
         ]]>
     </update>
-    <delete id = "deleteEntity" parameterType = "int">
+    <delete id = "removeProduct" parameterType = "int">
         <![CDATA[
         DELETE from products WHERE id = #{id};
         ]]>
     </delete>
-    <select id = "getEntityById" parameterType = "int" resultMap = "ProductResultMap">
+    <select id = "getProductById" parameterType = "int" resultMap = "ProductResultMap">
         <![CDATA[
         SELECT * FROM products WHERE id = #{id};
         ]]>

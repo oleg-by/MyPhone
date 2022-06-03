@@ -13,18 +13,18 @@ public class JDBCMySQLTest {
 
     public static void main(String[] args) {
 
-        testUserDAO();
-        testAddressDAO();
-        testCustomerDAO();
-        testProductDAO();
-        testOrderDAO();
+        testJDBCUserDAO();
+        testJDBCAddressDAO();
+        testJDBCCustomerDAO();
+        testJDBCProductDAO();
+        testJDBCOrderDAO();
 
     }
 
-    public static void testUserDAO() {
-        User userTestInsert = new User(8, "vitalik", "vitalik007@mail.ru", "dbnfkbr",
+    public static void testJDBCUserDAO() {
+        User userTestInsert = new User(9, "vitalik", "vitalik007@mail.ru", "dbnfkbr",
                 "2022-05-10 18:22:00", AccountType.USER, "1999-11-01");
-        User userTestUpdate = new User(8, "vitalik", "vitalik007@gmail.com", "qwertyasdf",
+        User userTestUpdate = new User(9, "vitalik", "vitalik007@gmail.com", "qwertyasdf",
                 "2022-05-10 18:22:00", AccountType.USER, "1999-11-01");
         UserDAO userDAO = new UserDAO();
 
@@ -34,25 +34,25 @@ public class JDBCMySQLTest {
 
         List<User> users = new ArrayList<>();
         int i = 1;
-        while (i < 9) {
+        while (i < 10) {
             users.add(userDAO.getEntityById(i));
             i++;
         }
         for (User user : users) {
             LOGGER.info(user);
         }
-        User userTestGet = userDAO.getEntityById(8);
+        User userTestGet = userDAO.getEntityById(9);
         LOGGER.info("An object read from the database: " + userTestGet);
         userDAO.updateEntity(userTestUpdate);
-        LOGGER.info("The updated object: " + userDAO.getEntityById(8));
+        LOGGER.info("The updated object: " + userDAO.getEntityById(9));
         LOGGER.info("The user with email 'valera@mail.ru' is " + userDAO.getUserByEmail("valera@mail.ru"));
 
         /* Uncomment the line below if you want to remove an inserted entry from the database.*/
 
-        //userDAO.removeEntity(8);
+        //userDAO.removeEntity(9);
     }
 
-    public static void testCustomerDAO() {
+    public static void testJDBCCustomerDAO() {
         Customer customerTestInsert = new Customer(8, "Vitaly", "Ivanov",
                 296718122, 16, 8);
         Customer customerTestUpdate = new Customer(8, "Vitaly", "Ivanov",
@@ -83,7 +83,7 @@ public class JDBCMySQLTest {
         //customerDAO.removeEntity(8);
     }
 
-    public static void testAddressDAO() {
+    public static void testJDBCAddressDAO() {
         Address addressTestInsert = new Address(16, "Ukraine", "Kiev", "Khreschatyk",
                 14, 1, 101, 10);
         Address addressTestUpdate = new Address(16, "Belarus", "Vitebsk", "Severnaya",
@@ -114,7 +114,7 @@ public class JDBCMySQLTest {
         //addressDAO.removeEntity(16);
     }
 
-    public static void testProductDAO() {
+    public static void testJDBCProductDAO() {
         Product productTestInsert = new Product(4, 1, "HUAWEI P50 PRO", 1500.0F, 4);
         Product productTestUpdate = new Product(4, 1, "HUAWEI P50 PRO", 1200.0F, 4);
         ProductDAO productDAO = new ProductDAO();
@@ -143,7 +143,7 @@ public class JDBCMySQLTest {
         //productDAO.removeEntity(4);
     }
 
-    public static void testOrderDAO() {
+    public static void testJDBCOrderDAO() {
         Order orderTestInsert = new Order(10, 8, 1, 4, 2400.0F,
                 2, 2);
         Order orderTestUpdate = new Order(10, 8, 1, 3, 2400.0F,

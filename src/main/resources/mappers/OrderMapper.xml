@@ -1,0 +1,51 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.laba.dao.IOrderDAO">
+    <resultMap type="Order" id="OrderResultMap" autoMapping="false">
+        <result property="id" column="id"/>
+        <result property="idCustomer" column="id_customer"/>
+        <result property="idProduct" column="id_product"/>
+        <result property="count" column="count"/>
+        <result property="unitPrice" column="unit_price"/>
+        <result property="orderAmount" column="order_amount"/>
+        <result property="idDelivery" column="id_delivery"/>
+        <result property="idPayment" column="id_payment"/>
+    </resultMap>
+    <insert id="saveOrder" parameterType="Order" useGeneratedKeys="true" keyProperty="id">
+        <![CDATA[
+        INSERT INTO orders (id, id_customer, id_product, count, unit_price, id_delivery, id_payment)
+        VALUES (#{id}, #{idCustomer}, #{idProduct}, #{count}, #{unitPrice}, #{idDelivery}, #{idPayment});
+        ]]>
+    </insert>
+    <update id="updateOrder" parameterType = "Order">
+        <![CDATA[
+        UPDATE orders SET
+        id_customer = #{idCustomer},
+        id_product = #{idProduct},
+        count = #{count},
+        unit_price = #{unitPrice},
+        id_delivery = #{idDelivery},
+        id_payment = #{idPayment}
+        WHERE id = #{id};
+        ]]>
+    </update>
+    <delete id = "removeOrder" parameterType = "int">
+        <![CDATA[
+        DELETE from orders WHERE id = #{id};
+        ]]>
+    </delete>
+    <select id = "getOrderById" parameterType = "int" resultMap = "OrderResultMap">
+        <![CDATA[
+        SELECT * FROM orders WHERE id = #{id};
+        ]]>
+    </select>
+    <select id = "getOrdersByCustomerId" parameterType = "int" resultMap = "OrderResultMap">
+        <![CDATA[
+        SELECT * FROM orders WHERE id_customer = #{idCustomer};
+        ]]>
+    </select>
+</mapper>

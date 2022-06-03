@@ -31,10 +31,9 @@
     <mappers>
         <mapper resource="mappers/UserMapper.xml"/>
         <mapper resource="mappers/CustomerMapper.xml"/>
-        <!--<mapper resource="mappers/ProductMapper.xml"/>
+        <mapper resource="mappers/ProductMapper.xml"/>
         <mapper resource="mappers/OrderMapper.xml"/>
-
-        <mapper resource="mappers/AddressMapper.xml"/> -->
+        <mapper resource="mappers/AddressMapper.xml"/>
     </mappers>
 
 </configuration>

@@ -1,0 +1,52 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.laba.dao.IAddressDAO">
+    <resultMap type="Address" id="AddressResultMap" autoMapping="false">
+        <result property="id" column="id"/>
+        <result property="country" column="country"/>
+        <result property="city" column="city"/>
+        <result property="street" column="street"/>
+        <result property="buildingNumber" column="building_number"/>
+        <result property="corp" column="corp"/>
+        <result property="apt" column="apt"/>
+        <result property="floor" column="floor"/>
+    </resultMap>
+    <insert id="saveAddress" parameterType="Address" useGeneratedKeys="true" keyProperty="id">
+        <![CDATA[
+        INSERT INTO addresses (id, country, city, street, building_number, corp, apt, floor)
+        VALUES (#{id}, #{country}, #{city}, #{street}, #{buildingNumber}, #{corp}, #{apt}, #{floor});
+        ]]>
+    </insert>
+    <update id="updateAddress" parameterType = "Address">
+        <![CDATA[
+        UPDATE addresses SET
+        country = #{country},
+        city = #{city},
+        street = #{street},
+        building_number = #{buildingNumber},
+        corp = #{corp},
+        apt = #{apt},
+        floor = #{floor}
+        WHERE id = #{id};
+        ]]>
+    </update>
+    <delete id = "removeAddress" parameterType = "int">
+        <![CDATA[
+        DELETE from addresses WHERE id = #{id};
+        ]]>
+    </delete>
+    <select id = "getAddressById" parameterType = "int" resultMap = "AddressResultMap">
+        <![CDATA[
+        SELECT * FROM addresses WHERE id = #{id};
+        ]]>
+    </select>
+    <select id = "getAddressesByCity" parameterType = "String" resultMap = "AddressResultMap">
+        <![CDATA[
+        SELECT * FROM addresses WHERE city = #{city};
+        ]]>
+    </select>
+</mapper>
