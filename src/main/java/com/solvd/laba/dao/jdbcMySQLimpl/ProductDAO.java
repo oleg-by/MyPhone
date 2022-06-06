@@ -120,6 +120,38 @@ public class ProductDAO implements IProductDAO {
     }
 
     @Override
+    public List<Product> getAll() {
+        Connection connection = pool.getConnection();
+        List<Product> resultList = new ArrayList<>();
+        String query = "SELECT * FROM products";
+        try (PreparedStatement pr = connection.prepareStatement(query)) {
+            pr.execute();
+            try (ResultSet rs = pr.getResultSet()) {
+                while (rs.next()) {
+                    Product product = new Product();
+                    product.setId(rs.getInt("id"));
+                    product.setIdCategory(rs.getInt("id_category"));
+                    product.setName(rs.getString("name"));
+                    product.setPrice(rs.getFloat("price"));
+                    product.setIdDescription(rs.getInt("id_description"));
+                    resultList.add(product);
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+        } finally {
+            if (connection != null) {
+                try {
+                    pool.releaseConnection(connection);
+                } catch (SQLException e) {
+                    LOGGER.error(e.getMessage());
+                }
+            }
+        }
+        return resultList;
+    }
+
+    @Override
     public List<Product> getProductsByCategory(int idCategory) {
         Connection connection = pool.getConnection();
         List<Product> resultList = new ArrayList<>();

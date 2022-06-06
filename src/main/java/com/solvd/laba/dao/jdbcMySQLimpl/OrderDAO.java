@@ -163,4 +163,38 @@ public class OrderDAO implements IOrderDAO {
         }
         return resultList;
     }
+
+    @Override
+    public List<Order> getAll() {
+        Connection connection = pool.getConnection();
+        List<Order> resultList = new ArrayList<>();
+        String query = "SELECT * FROM orders";
+        try (PreparedStatement pr = connection.prepareStatement(query)) {
+            pr.execute();
+            try (ResultSet rs = pr.getResultSet()) {
+                while (rs.next()) {
+                    Order order = new Order();
+                    order.setId(rs.getInt("id"));
+                    order.setIdCustomer(rs.getInt("id_customer"));
+                    order.setIdProduct(rs.getInt("id_product"));
+                    order.setCount(rs.getInt("count"));
+                    order.setUnitPrice(rs.getFloat("unit_price"));
+                    order.setIdDelivery(rs.getInt("id_delivery"));
+                    order.setIdPayment(rs.getInt("id_payment"));
+                    resultList.add(order);
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+        } finally {
+            if(connection != null) {
+                try {
+                    pool.releaseConnection(connection);
+                } catch (SQLException e) {
+                    LOGGER.error(e.getMessage());
+                }
+            }
+        }
+        return resultList;
+    }
 }

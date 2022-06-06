@@ -7,6 +7,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAO implements IUserDAO {
 
@@ -116,6 +118,40 @@ public class UserDAO implements IUserDAO {
                 LOGGER.error(e.getMessage());
             }
         }
+    }
+
+    @Override
+    public List<User> getAll() {
+        Connection connection = pool.getConnection();
+        List<User> resultList = new ArrayList<>();
+        String query = "SELECT * FROM users";
+        try (PreparedStatement pr = connection.prepareStatement(query)) {
+            pr.execute();
+            try (ResultSet rs = pr.getResultSet()) {
+                while (rs.next()) {
+                    User user = new User();
+                    user.setId(rs.getInt("id"));
+                    user.setUsername(rs.getString("username"));
+                    user.setEmail(rs.getString("email"));
+                    user.setPassword(rs.getString("password"));
+                    user.setCreateTime(rs.getString("create_time"));
+                    user.setAccountType(AccountType.valueOf(rs.getString("account_type").toUpperCase()));
+                    user.setBirth(rs.getString("birth"));
+                    resultList.add(user);
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+        } finally {
+            if(connection != null) {
+                try {
+                    pool.releaseConnection(connection);
+                } catch (SQLException e) {
+                    LOGGER.error(e.getMessage());
+                }
+            }
+        }
+        return resultList;
     }
 
     @Override

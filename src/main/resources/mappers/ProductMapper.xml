@@ -43,4 +43,9 @@
         SELECT * FROM products WHERE id_category = #{idCategory};
         ]]>
     </select>
+    <select id = "getAllProducts" resultMap = "ProductResultMap">
+        <![CDATA[
+        SELECT * FROM products;
+        ]]>
+    </select>
 </mapper>

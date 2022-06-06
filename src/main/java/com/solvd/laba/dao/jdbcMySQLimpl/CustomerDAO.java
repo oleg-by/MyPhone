@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CustomerDAO implements ICustomerDAO {
 
@@ -122,6 +124,39 @@ public class CustomerDAO implements ICustomerDAO {
                 }
             }
         }
+    }
+
+    @Override
+    public List<Customer> getAll() {
+        Connection connection = pool.getConnection();
+        List<Customer> resultList = new ArrayList<>();
+        String query = "SELECT * FROM customers";
+        try (PreparedStatement pr = connection.prepareStatement(query)) {
+            pr.execute();
+            try (ResultSet rs = pr.getResultSet()) {
+                while (rs.next()) {
+                    Customer customer = new Customer();
+                    customer.setId(rs.getInt("id"));
+                    customer.setFirstName(rs.getString("first_name"));
+                    customer.setLastName(rs.getString("last_name"));
+                    customer.setPhoneNumber(rs.getLong("phone_number"));
+                    customer.setIdAddressC(rs.getInt("id_address_c"));
+                    customer.setIdUser(rs.getInt("id_user"));
+                    resultList.add(customer);
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+        } finally {
+            if(connection != null) {
+                try {
+                    pool.releaseConnection(connection);
+                } catch (SQLException e) {
+                    LOGGER.error(e.getMessage());
+                }
+            }
+        }
+        return resultList;
     }
 
     @Override

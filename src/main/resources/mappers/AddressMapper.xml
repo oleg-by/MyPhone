@@ -49,4 +49,9 @@
         SELECT * FROM addresses WHERE city = #{city};
         ]]>
     </select>
+    <select id = "getAllAddresses" resultMap = "AddressResultMap">
+        <![CDATA[
+        SELECT * FROM addresses;
+        ]]>
+    </select>
 </mapper>

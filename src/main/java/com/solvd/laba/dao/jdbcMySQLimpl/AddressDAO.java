@@ -133,6 +133,41 @@ public class AddressDAO implements IAddressDAO {
     }
 
     @Override
+    public List<Address> getAll() {
+        Connection connection = pool.getConnection();
+        List<Address> resultList = new ArrayList<>();
+        String query = "SELECT * FROM addresses";
+        try (PreparedStatement pr = connection.prepareStatement(query)) {
+            pr.execute();
+            try (ResultSet rs = pr.getResultSet()) {
+                while (rs.next()) {
+                    Address address = new Address();
+                    address.setId(rs.getInt("id"));
+                    address.setCountry(rs.getString("country"));
+                    address.setCity(rs.getString("city"));
+                    address.setStreet(rs.getString("street"));
+                    address.setBuildingNumber(rs.getInt("building_number"));
+                    address.setCorp(rs.getInt("corp"));
+                    address.setApt(rs.getInt("apt"));
+                    address.setFloor(rs.getInt("floor"));
+                    resultList.add(address);
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+        } finally {
+            if (connection != null) {
+                try {
+                    pool.releaseConnection(connection);
+                } catch (SQLException e) {
+                    LOGGER.error(e.getMessage());
+                }
+            }
+        }
+        return resultList;
+    }
+
+    @Override
     public List<Address> getAddressesByCity(String city) {
         Connection connection = pool.getConnection();
         List<Address> resultList = new ArrayList<>();

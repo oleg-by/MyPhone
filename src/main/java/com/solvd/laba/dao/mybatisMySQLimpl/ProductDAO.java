@@ -1,6 +1,7 @@
 package com.solvd.laba.dao.mybatisMySQLimpl;
 
 import com.solvd.laba.dao.IProductDAO;
+import com.solvd.laba.model.Order;
 import com.solvd.laba.model.Product;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionException;
@@ -55,6 +56,18 @@ public class ProductDAO implements IProductDAO, ISession{
         } catch (SqlSessionException e) {
             LOGGER.error(e.getMessage());
         }
+    }
+
+    @Override
+    public List<Product> getAll() {
+        try (SqlSession session = getSqlSession().openSession()) {
+            List<Product> products = session.selectList("getAllProducts");
+            session.commit();
+            return products;
+        } catch (SqlSessionException e) {
+            LOGGER.error(e.getMessage());
+        }
+        return null;
     }
 
     @Override

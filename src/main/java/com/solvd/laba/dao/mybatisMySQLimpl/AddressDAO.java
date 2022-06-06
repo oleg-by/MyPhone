@@ -2,6 +2,7 @@ package com.solvd.laba.dao.mybatisMySQLimpl;
 
 import com.solvd.laba.dao.IAddressDAO;
 import com.solvd.laba.model.Address;
+import com.solvd.laba.model.User;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionException;
 import org.apache.logging.log4j.LogManager;
@@ -67,5 +68,17 @@ public class AddressDAO implements IAddressDAO, ISession {
         } catch (SqlSessionException e) {
             LOGGER.error(e.getMessage());
         }
+    }
+
+    @Override
+    public List<Address> getAll() {
+        try (SqlSession session = getSqlSession().openSession()) {
+            List<Address> addresses = session.selectList("getAllAddresses");
+            session.commit();
+            return addresses;
+        } catch (SqlSessionException e) {
+            LOGGER.error(e.getMessage());
+        }
+        return null;
     }
 }

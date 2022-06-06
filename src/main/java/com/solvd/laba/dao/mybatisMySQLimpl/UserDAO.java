@@ -1,11 +1,14 @@
 package com.solvd.laba.dao.mybatisMySQLimpl;
 
 import com.solvd.laba.dao.IUserDAO;
+import com.solvd.laba.model.Product;
 import com.solvd.laba.model.User;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.List;
 
 public class UserDAO implements IUserDAO, ISession {
 
@@ -53,6 +56,18 @@ public class UserDAO implements IUserDAO, ISession {
         } catch (SqlSessionException e) {
             LOGGER.error(e.getMessage());
         }
+    }
+
+    @Override
+    public List<User> getAll() {
+        try (SqlSession session = getSqlSession().openSession()) {
+            List<User> users = session.selectList("getAllUsers");
+            session.commit();
+            return users;
+        } catch (SqlSessionException e) {
+            LOGGER.error(e.getMessage());
+        }
+        return null;
     }
 
     @Override

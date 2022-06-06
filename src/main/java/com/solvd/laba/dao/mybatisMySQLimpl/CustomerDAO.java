@@ -2,10 +2,13 @@ package com.solvd.laba.dao.mybatisMySQLimpl;
 
 import com.solvd.laba.dao.ICustomerDAO;
 import com.solvd.laba.model.Customer;
+import com.solvd.laba.model.User;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.List;
 
 public class CustomerDAO implements ICustomerDAO, ISession {
 
@@ -53,6 +56,18 @@ public class CustomerDAO implements ICustomerDAO, ISession {
         } catch (SqlSessionException e) {
             LOGGER.error(e.getMessage());
         }
+    }
+
+    @Override
+    public List<Customer> getAll() {
+        try (SqlSession session = getSqlSession().openSession()) {
+            List<Customer> customers = session.selectList("getAllCustomers");
+            session.commit();
+            return customers;
+        } catch (SqlSessionException e) {
+            LOGGER.error(e.getMessage());
+        }
+        return null;
     }
 
     @Override

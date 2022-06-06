@@ -45,4 +45,9 @@
         SELECT * FROM customers WHERE id_user = #{idUser};
         ]]>
     </select>
+    <select id = "getAllCustomers" resultMap = "CustomerResultMap">
+        <![CDATA[
+        SELECT * FROM customers;
+        ]]>
+    </select>
 </mapper>

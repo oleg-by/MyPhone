@@ -68,4 +68,16 @@ public class OrderDAO implements IOrderDAO, ISession {
         }
         return null;
     }
+
+    @Override
+    public List<Order> getAll() {
+        try (SqlSession session = getSqlSession().openSession()) {
+            List<Order> orders = session.selectList("getAllOrders");
+            session.commit();
+            return orders;
+        } catch (SqlSessionException e) {
+            LOGGER.error(e.getMessage());
+        }
+        return null;
+    }
 }
