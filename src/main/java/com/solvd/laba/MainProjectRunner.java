@@ -60,24 +60,20 @@ public class MainProjectRunner {
 
     public static List<Gadget> createObjects() {
         List<Cpu> cpuList = new ArrayList<>();
-        cpuList.add(new Cpu("Apple A15 Bionic", 3240));
-        cpuList.add(new Cpu("Qualcomm Snapdragon 8 Gen1", 3000));
-        cpuList.add(new Cpu("Apple M1", 3200));
-        cpuList.add(new Cpu("Qualcomm Snapdragon 888", 2840));
-        cpuList.add(new Cpu("HiSilicon Kirin 990 5G", 2860));
+        cpuList.add(new CpuBuilderImpl().setCpuModel("Apple A15 Bionic").setCpuSpeed(3240).build());
+        cpuList.add(new CpuBuilderImpl().setCpuModel("Qualcomm Snapdragon 8 Gen1").setCpuSpeed(3000).build());
+        cpuList.add(new CpuBuilderImpl().setCpuModel("Apple M1").setCpuSpeed(3200).build());
+        cpuList.add(new CpuBuilderImpl().setCpuModel("Qualcomm Snapdragon 888").setCpuSpeed(2840).build());
+        cpuList.add(new CpuBuilderImpl().setCpuModel("HiSilicon Kirin 990 5G").setCpuSpeed(2860).build());
 
         List<Battery> batteryList = new ArrayList<>();
-        try {
-            batteryList.add(new Battery(4325, "Li-ion"));
-            batteryList.add(new Battery(5000, "Li-ion"));
-            batteryList.add(new Battery(9720, "Li-ion"));
-            batteryList.add(new Battery(1094, "Li-ion"));
-            batteryList.add(new Battery(4360, "Li-ion"));
-            batteryList.add(new Battery(4500, "Li-ion"));
-            batteryList.add(new Battery(4000, "Li-ion"));
-        } catch (BatteryException e) {
-            LOGGER.error(e.getMessage());
-        }
+        batteryList.add(new BatteryBuilderImpl().setCapacity(4325).setTypeBattery("Li-ion").build());
+        batteryList.add(new BatteryBuilderImpl().setCapacity(5000).setTypeBattery("Li-ion").build());
+        batteryList.add(new BatteryBuilderImpl().setCapacity(9720).setTypeBattery("Li-ion").build());
+        batteryList.add(new BatteryBuilderImpl().setCapacity(1094).setTypeBattery("Li-ion").build());
+        batteryList.add(new BatteryBuilderImpl().setCapacity(4360).setTypeBattery("Li-ion").build());
+        batteryList.add(new BatteryBuilderImpl().setCapacity(4500).setTypeBattery("Li-ion").build());
+        batteryList.add(new BatteryBuilderImpl().setCapacity(4000).setTypeBattery("Li-ion").build());
 
         //Using enums fields
         Phone iphone = new Phone(GadgetName.IPHONE, "160.8 x 78.1 x 7.7", Color.WHITE, 240, batteryList.get(0), 291112233, "iOS", cpuList.get(0));
@@ -119,7 +115,7 @@ public class MainProjectRunner {
     }
 
     public static void checkCharging(List<Gadget> myGadgets) throws ChargingException {
-        File file = new File("D:\\dev\\MyPhone\\src\\main\\resources\\inputCurrent");
+        File file = new File(System.getProperty("user.dir") + "/src/main/resources/inputCurrent");
         String str = "";
         // Read data from file (using try with resources)
         try (Scanner scanner = new Scanner(file)) {
@@ -225,7 +221,7 @@ public class MainProjectRunner {
     }
 
     public static void calculateNumberOfUniqueWords() {
-        String path = "D:\\dev\\MyPhone\\src\\main\\resources\\article";
+        String path = System.getProperty("user.dir") + "/src/main/resources/article";
         File file = new File(path);
         String text = null;
         try {
@@ -248,7 +244,7 @@ public class MainProjectRunner {
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
             result.add(entry.getKey() + " - " + entry.getValue());
         }
-        File fileOutput = new File("D:\\dev\\MyPhone\\src\\main\\resources\\output");
+        File fileOutput = new File(System.getProperty("user.dir") + "/src/main/resources/output");
         try {
             FileUtils.writeLines(fileOutput, result);
         } catch (IOException e) {
