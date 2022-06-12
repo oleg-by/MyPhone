@@ -65,9 +65,9 @@ public class JAXBTest {
             customerTest = (CustomerTest) context.createUnmarshaller()
                     .unmarshal(new FileReader(System.getProperty("user.dir") + "/src/main/resources/msXML_output.xml"));
         } catch (JAXBException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
         return customerTest;
     }
