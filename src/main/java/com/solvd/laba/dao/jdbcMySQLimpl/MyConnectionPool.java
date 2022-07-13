@@ -20,8 +20,8 @@ public class MyConnectionPool {
     private MyConnectionPool() {
     }
 
-    private static List<Connection> freeConnections = new ArrayList<>();
-    private static List<Connection> usedConnections = new ArrayList<>();
+    private static Vector<Connection> freeConnections = new Vector<>();
+    private static Vector<Connection> usedConnections = new Vector<>();
 
     public static synchronized MyConnectionPool getInstance() {
         if (instance == null) {
@@ -44,9 +44,9 @@ public class MyConnectionPool {
             LOGGER.error(e.getMessage());
         }
 
-        String url = p.getProperty("jdbc.url");
-        String userName = p.getProperty("jdbc.username");
-        String password = p.getProperty("jdbc.password");
+        String url = p.getProperty("url");
+        String userName = p.getProperty("username");
+        String password = p.getProperty("password");
 
         for (int i = 0; i < INITIAL_POOL_SIZE; i++) {
             freeConnections.add(createConnection(url, userName, password));
@@ -60,12 +60,10 @@ public class MyConnectionPool {
     }
 
     public synchronized void releaseConnection(Connection connection) throws SQLException {
-        if (connection != null) {
-            if (usedConnections.remove(connection)) {
-                freeConnections.add(connection);
-            } else {
-                throw new SQLException("The connection has already returned or it's not for this pool.");
-            }
+        if (usedConnections.remove(connection)) {
+            freeConnections.add(connection);
+        } else {
+            throw new SQLException("The connection has already returned or it's not for this pool.");
         }
     }
 
@@ -77,9 +75,4 @@ public class MyConnectionPool {
         }
         return null;
     }
-
-    public int getSize() {
-        return freeConnections.size() + usedConnections.size();
-    }
-
 }
